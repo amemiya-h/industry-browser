@@ -1,0 +1,13 @@
+.source-button {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+    display: inline-block;
+    background: none no-repeat;
+}
+.source-button > * {
+    display: block; /* Ensures children are displayed as block-level elements */
+}

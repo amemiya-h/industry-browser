@@ -1,0 +1,13 @@
+.Viewport {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+
+    background-color: var(--window-light);
+    background-image: url("src/assets/graphics/canvasUI/grid.png");
+    background-repeat: repeat;
+    background-blend-mode: lighten;
+}
