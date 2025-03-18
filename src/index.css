@@ -1,21 +1,23 @@
+@import "tailwindcss";
+
 @font-face {
   font-family: "eve-sans-neue";
-  src: url("src/assets/fonts/evesansneue-regular.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: "eve-sans-neue-condensed";
-  src: url("src/assets/fonts/evesansneue-condensed.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-condensed.otf") format("opentype");
 }
 
 @font-face {
   font-family: "eve-sans-neue-expanded";
-  src: url("src/assets/fonts/evesansneue-expanded.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-expanded.otf") format("opentype");
 }
 
 :root {
   font-family: eve-sans-neue-expanded, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1;
+  line-height: 1.2;
   font-weight: 400;
 
   color-scheme: dark;
@@ -30,6 +32,11 @@
   --window-light-active: #212325;
   --window-dark: #171717;
   --window-dark-active: #151719;
+
+  --text-highlight: #e8e8e8;
+  --text-bright: #d9d9d9;
+  --text-dim: #898989;
+  --text-dark: #5a5a5a;
 
   --manufacture-yellow: #ff9900;
   --reaction-cyan: #00ffdd;
@@ -58,19 +65,25 @@ body {
 
 .text{
   font-family: "eve-sans-neue-expanded", sans-serif;
-  font-size: 9pt;
+  font-size: 12pt;
   color: #bfbfbf;
 }
 
 .text-sm{
   font-family: "eve-sans-neue", sans-serif;
-  font-size: 8pt;
-  letter-spacing: 0.02em;
+  font-size: 10pt;
+  letter-spacing: 0.025em;
+}
+
+.text-canvas{
+  font-family: "eve-sans-neue", sans-serif;
+  font-size: 16pt;
+  letter-spacing: 0.04em;
 }
 
 .text-title{
   font-family: "eve-sans-neue-condensed", sans-serif;
-  font-size: 12pt;
+  font-size: 16pt;
 }
 
 .text-highlight{

@@ -7,7 +7,7 @@
     flex-grow: 1;
 
     background-color: var(--window-light);
-    background-image: url("src/assets/graphics/canvasUI/grid.png");
+    background-image: url("/src/assets/graphics/canvasUI/grid.png");
     background-repeat: repeat;
     background-blend-mode: lighten;
 }
