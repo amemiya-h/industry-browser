@@ -1,7 +1,7 @@
 import "./Header.css"
 import {useState} from "react";
-import industry from "/src/assets/graphics/industry.png"
-import info from "/src/assets/graphics/info.png"
+import industry from "@/assets/graphics/industry.png"
+import info from "@/assets/graphics/info.png"
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
