@@ -7,7 +7,6 @@ const App = ()=> {
     <div className="App">
         <Header />
         <Viewport />
-        <p>Test</p>
     </div>
   )
 }

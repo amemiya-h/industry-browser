@@ -52,6 +52,7 @@
 
     width: 50vw;
     min-width: 20em;
+    max-height: 80vh;
 
     margin: 1em;
 
@@ -73,6 +74,7 @@
 
 .textbox .content {
     margin: 0 1em;
+    overflow: auto;
 }
 
 .textbox .content p {
@@ -80,8 +82,8 @@
 }
 
 .close-button button {
-    margin: 1em auto;
-    padding: 0.5em;
+    margin: 1em;
+    padding: 0.5em 1em;
     border: 1px solid var(--secondary);
     background-color: color-mix(in srgb, var(--secondary), transparent 60%);
 }
