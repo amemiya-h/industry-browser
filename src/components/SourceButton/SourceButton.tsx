@@ -106,7 +106,6 @@ const SourceButton = ({ state, variant, onClick }:Props) => {
 
     const handleClick = () => {
         setPressedInside(false);
-        setStatus("hover")
         onClick?.();
     };
 
