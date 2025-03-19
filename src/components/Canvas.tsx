@@ -1,9 +1,5 @@
-import {useMemo} from 'react';
 import {Background, BackgroundVariant, ReactFlow} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import {hierarchy, tree} from 'd3-hierarchy';
-import ProductionNode from "./ProductionNode.tsx";
-import SourceButton from "./SourceButton.tsx";
 
 export interface TreeNode {
     id: number;
@@ -13,18 +9,8 @@ export interface TreeNode {
     isSuppressed: boolean;
 }
 
-interface Props {
-    data?: TreeNode;
-    onSourceButtonClick?: (parentId: number) => void;
-}
 
-const nodeTypes =
-    {
-        production: ProductionNode,
-        sourceButton: SourceButton,
-    }
-
-const Canvas = ({ data, onSourceButtonClick }: Props) => {
+const Canvas = () => {
 
     return (
         <div className="flex-1 relative overflow-hidden z-10 bg-window-dark">
