@@ -55,6 +55,9 @@ const Overlay= ({isOpen, closeOverlay} : OverlayProps) => {
                             href={"https://github.com/farzher/fuzzysort/blob/master/LICENSE"} className={"text-link"}>MIT
                             License</a>.
                         </p>
+                        <p className="text-regular m-[1em]">
+                            Special thanks to L.K.
+                        </p>
                         <p className="text-regular text-dim m-[1em]">
                             EVE Online and the EVE logo are the registered trademarks of CCP hf. All rights are reserved
                             worldwide. All other trademarks are the property of their respective owners. EVE Online, the
@@ -87,7 +90,7 @@ const Header = () => {
     return (
         <div id={"header"} className={"w-full h-[3em] bg-window-light-active flex flex-row items-center justify-start"}>
             <img src={industry} alt="Industry" className="logo" />
-            <div className="text text-title text-dim h-full flex flex-col content-center justify-center mr-[5em]">
+            <div className="text text-title text-dim h-full flex flex-col content-center justify-center min-w-[10em]">
                 <p>EVE Industry Browser</p>
             </div>
             <button onClick={openOverlay} className="h-full hover:text-highlight hover:cursor-pointer">About</button>
