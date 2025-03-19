@@ -1,12 +1,49 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+@import "tailwindcss";
 
-  height: 100vh;
-  width: 100vw;
+@theme {
+  --font-sans: "eve-sans-neue";
+  --font-condensed: "eve-sans-neue-condensed";
+  --font-expanded: "eve-sans-neue-expanded";
 
-  margin: 0;
-  padding: 0;
+  --color-primary: #58a7bf;
+  --color-secondary: #58a7bf;
+  --color-background: #060a0c;
+
+  --color-window-light: #232323;
+  --color-window-light-active: #212325;
+  --color-window-dark: #171717;
+  --color-window-dark-active: #151719;
+  --color-window-border: #2E2E2E;
+  --color-window-border-active: #2C2E30;
+
+  --color-highlight: #e8e8e8;
+  --color-bright: #d9d9d9;
+  --color-normal: #bfbfbf;
+  --color-dim: #898989;
+  --color-dark: #5a5a5a;
+
+  --color-manufacture-yellow: #ff9900;
+  --color-reaction-cyan: #00ffdd;
+  --color-pi-green: #44ff00;
+  --color-science-blue: #3370b2;
+}
+
+.text{
+  @apply text-[12pt] text-normal;
+}
+
+.text-sm{
+  @apply font-sans text-[10pt] tracking-wide;
+}
+
+.text-canvas{
+  @apply font-sans text-[16pt] tracking-wide;
+}
+
+.text-title{
+  @apply font-condensed text-[16pt];
+}
+
+.logo {
+  @apply size-[2em] m-[1em]
 }

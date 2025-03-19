@@ -1,29 +1,29 @@
 import {useEffect, useState} from "react";
-import "./SourceButton.css"
-import sourcemanufacturingexpanded from "@/assets/graphics/canvasUI/source/sourcemanufacturingexpanded.png"
-import sourcemanufacturingexpandedhover from "@/assets/graphics/canvasUI/source/sourcemanufacturingexpandedhover.png"
-import sourcemanufacturingexpandedpressed from "@/assets/graphics/canvasUI/source/sourcemanufacturingexpandedpressed.png"
-import sourceinventionexpanded from "@/assets/graphics/canvasUI/source/sourceinventionexpanded.png"
-import sourceinventionexpandedhover from "@/assets/graphics/canvasUI/source/sourceinventionexpandedhover.png"
-import sourceinventionexpandedpressed from "@/assets/graphics/canvasUI/source/sourceinventionexpandedpressed.png"
-import sourcereactionexpanded from "@/assets/graphics/canvasUI/source/sourcereactionexpanded.png"
-import sourcereactionexpandedhover from "@/assets/graphics/canvasUI/source/sourcereactionexpandedhover.png"
-import sourcereactionexpandedpressed from "@/assets/graphics/canvasUI/source/sourcereactionexpandedpressed.png"
-import sourcepiexpanded from "@/assets/graphics/canvasUI/source/sourcepiexpanded.png"
-import sourcepiexpandedhover from "@/assets/graphics/canvasUI/source/sourcepiexpandedhover.png"
-import sourcepiexpandedpressed from "@/assets/graphics/canvasUI/source/sourcepiexpandedpressed.png"
-import sourcemanufacturingsuppressed from "@/assets/graphics/canvasUI/source/sourcemanufacturingsuppressed.png"
-import sourcemanufacturingsuppressedhover from "@/assets/graphics/canvasUI/source/sourcemanufacturingsuppressedhover.png"
-import sourcemanufacturingsuppressedpressed from "@/assets/graphics/canvasUI/source/sourcemanufacturingsuppressedpressed.png"
-import sourceinventionsuppressed from "@/assets/graphics/canvasUI/source/sourceinventionsuppressed.png"
-import sourceinventionsuppressedhover from "@/assets/graphics/canvasUI/source/sourceinventionsuppressedhover.png"
-import sourceinventionsuppressedpressed from "@/assets/graphics/canvasUI/source/sourceinventionsuppressedpressed.png"
-import sourcereactionsuppressed from "@/assets/graphics/canvasUI/source/sourcereactionsuppressed.png"
-import sourcereactionsuppressedhover from "@/assets/graphics/canvasUI/source/sourcereactionsuppressedhover.png"
-import sourcereactionsuppressedpressed from "@/assets/graphics/canvasUI/source/sourcereactionsuppressedpressed.png"
-import sourcepisuppressed from "@/assets/graphics/canvasUI/source/sourcepisuppressed.png"
-import sourcepisuppressedhover from "@/assets/graphics/canvasUI/source/sourcepisuppressedhover.png"
-import sourcepisuppressedpressed from "@/assets/graphics/canvasUI/source/sourcepisuppressedpressed.png"
+
+import sourcemanufacturingexpanded from "../assets/graphics/canvasUI/source/sourcemanufacturingexpanded.png"
+import sourcemanufacturingexpandedhover from "../assets/graphics/canvasUI/source/sourcemanufacturingexpandedhover.png"
+import sourcemanufacturingexpandedpressed from "../assets/graphics/canvasUI/source/sourcemanufacturingexpandedpressed.png"
+import sourceinventionexpanded from "../assets/graphics/canvasUI/source/sourceinventionexpanded.png"
+import sourceinventionexpandedhover from "../assets/graphics/canvasUI/source/sourceinventionexpandedhover.png"
+import sourceinventionexpandedpressed from "../assets/graphics/canvasUI/source/sourceinventionexpandedpressed.png"
+import sourcereactionexpanded from "../assets/graphics/canvasUI/source/sourcereactionexpanded.png"
+import sourcereactionexpandedhover from "../assets/graphics/canvasUI/source/sourcereactionexpandedhover.png"
+import sourcereactionexpandedpressed from "../assets/graphics/canvasUI/source/sourcereactionexpandedpressed.png"
+import sourcepiexpanded from "../assets/graphics/canvasUI/source/sourcepiexpanded.png"
+import sourcepiexpandedhover from "../assets/graphics/canvasUI/source/sourcepiexpandedhover.png"
+import sourcepiexpandedpressed from "../assets/graphics/canvasUI/source/sourcepiexpandedpressed.png"
+import sourcemanufacturingsuppressed from "../assets/graphics/canvasUI/source/sourcemanufacturingsuppressed.png"
+import sourcemanufacturingsuppressedhover from "../assets/graphics/canvasUI/source/sourcemanufacturingsuppressedhover.png"
+import sourcemanufacturingsuppressedpressed from "../assets/graphics/canvasUI/source/sourcemanufacturingsuppressedpressed.png"
+import sourceinventionsuppressed from "../assets/graphics/canvasUI/source/sourceinventionsuppressed.png"
+import sourceinventionsuppressedhover from "../assets/graphics/canvasUI/source/sourceinventionsuppressedhover.png"
+import sourceinventionsuppressedpressed from "../assets/graphics/canvasUI/source/sourceinventionsuppressedpressed.png"
+import sourcereactionsuppressed from "../assets/graphics/canvasUI/source/sourcereactionsuppressed.png"
+import sourcereactionsuppressedhover from "../assets/graphics/canvasUI/source/sourcereactionsuppressedhover.png"
+import sourcereactionsuppressedpressed from "../assets/graphics/canvasUI/source/sourcereactionsuppressedpressed.png"
+import sourcepisuppressed from "../assets/graphics/canvasUI/source/sourcepisuppressed.png"
+import sourcepisuppressedhover from "../assets/graphics/canvasUI/source/sourcepisuppressedhover.png"
+import sourcepisuppressedpressed from "../assets/graphics/canvasUI/source/sourcepisuppressedpressed.png"
 
 
 interface Props {
@@ -112,7 +112,7 @@ const SourceButton = ({ state, variant, onClick }:Props) => {
 
     return (
         <button
-            className="source-button"
+            className="w-fit h-fit border-none inline-block hover:cursor-pointer"
             onMouseDown={handlePress}
             onMouseLeave={() => setStatus("idle")}
             onMouseEnter={() => {
@@ -126,6 +126,7 @@ const SourceButton = ({ state, variant, onClick }:Props) => {
             onClick={handleClick}
         >
             <img
+                className="block"
                 src={images[state][variant][status]}
                 alt={`${state} ${variant} button`}
                 draggable="false"
