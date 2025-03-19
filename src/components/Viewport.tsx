@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import * as fuzzysort from "fuzzysort";
 
 import Canvas from "./Canvas.tsx";
 import Sidebar from "./Sidebar.tsx";
@@ -20,10 +21,8 @@ const Viewport = () => {
 
     useEffect(() => {
         if (query) {
-            const partialMatches = items.filter((item) =>
-                item.name.toLowerCase().includes(query.toLowerCase())
-            );
-            setSuggestions(partialMatches);
+            const partialMatches = fuzzysort.go(query, items, {key: "name", threshold: 0.8})
+            setSuggestions(partialMatches.map((m) => m["obj"]));
         } else {
             setSuggestions([]);
         }
@@ -34,21 +33,7 @@ const Viewport = () => {
             <Canvas typeID={result ? result.id : 0} />
 
             <div className="absolute z-20 top-[1em] left-[1em]">
-                <SearchBar setQuery={setQuery}/>
-                {suggestions.length > 0 && (
-                    <div className="bg-window-light/80 mt-2  border rounded shadow-lg max-h-40 overflow-y-auto">
-                        {suggestions.map((item) => (
-                            <div key={item.id} className={"p-[1em] hover:bg-gray-200 hover:cursor-pointer"} onClick={ () =>{
-                                setResult(item);
-                                setQuery('');
-                                const searchbar = document.getElementById("SearchBar") as HTMLInputElement;
-                                searchbar.value = '';
-                            }}>
-                                {item.name}
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <SearchBar setQuery={setQuery} setResult={setResult} suggestions={suggestions}/>
             </div>
 
             <Sidebar collapsed = {collapsed} setCollapsed = {setCollapsed}/>
