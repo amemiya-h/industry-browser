@@ -22,7 +22,7 @@ const QuantityToString = (quantity: number) => {
     }
 }
 
-const Node = ({ typeID, quantity } : Props) => {
+const ProductionNode = ({ typeID, quantity } : Props) => {
     const typeIconURL : string = "https://images.evetech.net/types/" + typeID + "/icon?size=64";
     return (
         <div className="h-[120px] w-[90px] bg-[url('./assets/graphics/canvasUI/bg.png')]">
@@ -36,4 +36,4 @@ const Node = ({ typeID, quantity } : Props) => {
     )
 }
 
-export default Node;
+export default ProductionNode;

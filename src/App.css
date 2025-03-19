@@ -21,6 +21,7 @@
   --color-normal: #bfbfbf;
   --color-dim: #898989;
   --color-dark: #5a5a5a;
+  --color-link: #ffff00;
 
   --color-manufacture-yellow: #ff9900;
   --color-reaction-cyan: #00ffdd;
@@ -28,8 +29,8 @@
   --color-science-blue: #3370b2;
 }
 
-.text{
-  @apply text-[12pt] text-normal;
+.text-regular{
+  @apply font-expanded text-[12pt];
 }
 
 .text-sm{
@@ -44,6 +45,14 @@
   @apply font-condensed text-[16pt];
 }
 
+.text-link{
+  @apply font-expanded text-[12pt] font-bold text-highlight hover:text-link hover:cursor-pointer;
+}
+
 .logo {
   @apply size-[2em] m-[1em]
+}
+
+.App {
+  white-space: pre-wrap;
 }

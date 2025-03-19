@@ -1,16 +1,34 @@
 @font-face {
   font-family: "eve-sans-neue";
-  src: url("/src/assets/fonts/evesansneue-regular.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "eve-sans-neue";
+  src: url("/src/assets/fonts/evesansneue-bold.woff2") format("woff2");
+  font-weight: bold;
 }
 
 @font-face {
   font-family: "eve-sans-neue-condensed";
-  src: url("/src/assets/fonts/evesansneue-condensed.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-condensed.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "eve-sans-neue-condensed";
+  src: url("/src/assets/fonts/evesansneue-condensedbold.woff2") format("woff2");
+  font-weight: bold;
 }
 
 @font-face {
   font-family: "eve-sans-neue-expanded";
-  src: url("/src/assets/fonts/evesansneue-expanded.otf") format("opentype");
+  src: url("/src/assets/fonts/evesansneue-expanded.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "eve-sans-neue-expanded";
+  src: url("/src/assets/fonts/evesansneue-expandedbold.woff2") format("woff2");
+  font-weight: bold;
 }
 
 :root {
@@ -21,6 +39,8 @@
   color-scheme: dark;
   color: #bfbfbf;
   background-color: #060a0c;
+
+
 
   font-synthesis: weight style;
   text-rendering: geometricPrecision;

@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.14",
+    "@xyflow/react": "^12.4.4",
+    "d3-hierarchy": "^3.1.2",
     "fuzzysort": "^3.1.0",
     "gh-pages": "^6.3.0",
     "react": "^19.0.0",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/d3-hierarchy": "^3.1.7",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
