@@ -16,7 +16,7 @@ const Overlay= ({isOpen, closeOverlay} : OverlayProps) => {
                 onClick={closeOverlay}
             >
                 <div
-                    className="bg-window-light-active border border-window-border border-t-primary w-[50vw] min-w-[20em] max-h-[80vh] m-[1em] flex flex-col justify-center items-center"
+                    className="bg-window-light-active border border-window-border-active border-t-primary w-[50vw] min-w-[20em] max-h-[80vh] m-[1em] flex flex-col justify-center items-center"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="m-0 self-stretch flex flex-row justify-start items-center">
@@ -40,7 +40,7 @@ const Overlay= ({isOpen, closeOverlay} : OverlayProps) => {
                             If you found this useful and would like to donate some ISK or contact me in game, please
                             reach out to Kei Aozora.
                         </p>
-                        <hr className="h-px m-[1em] bg-bright border-0"/>
+                        <hr className="h-px m-[1em] bg-dim border-0"/>
                         <p className="text-regular m-[1em]">
                             Built with React + Vite.
                         </p>

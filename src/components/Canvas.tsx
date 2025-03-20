@@ -1,29 +1,42 @@
-import {Background, BackgroundVariant, ReactFlow} from '@xyflow/react';
+import {Background, BackgroundVariant, ReactFlow, Viewport, Node} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-export interface TreeNode {
-    id: number;
-    quantity: number;
-    productionType: "manufacturing"|"invention"|"reaction"|"pi"|"none";
-    input: TreeNode[];
-    isSuppressed: boolean;
+import ProductionNode from "./ProductionNode.tsx";
+import SourceButtonNode from "./SourceButtonNode.tsx";
+
+interface Edge {
+    id: string;
+    source: string;
+    target: string;
 }
 
+interface Props {
+    nodes: Node[];
+    edges: Edge[];
+}
 
-const Canvas = () => {
+const nodeTypes = {'production': ProductionNode, 'sourceButton': SourceButtonNode};
 
+const getViewportCenter = (node: Node, zoom = 1): Viewport => {
+    const centerX = node.position.x + window.innerWidth/2;
+    const centerY = node.position.y + window.innerHeight/6;
+    console.log(centerX, centerY, zoom);
+    return { x: centerX, y: centerY, zoom };
+};
+
+const Canvas = ({ nodes, edges } : Props) => {
+    const defaultViewport = getViewportCenter(nodes[0], 0.5);
     return (
         <div className="flex-1 relative overflow-hidden z-10 bg-window-dark">
             <ReactFlow
-                defaultViewport={{x: 0, y:0, zoom: 0.5}}
+                nodes={nodes}
+                edges={edges}
+                nodeOrigin={[0.5, 0.5]}
+                nodeTypes={nodeTypes}
+                defaultViewport={defaultViewport}
                 minZoom={0.1}
                 maxZoom={1}
-                fitView={false}
                 proOptions={{ hideAttribution: true }}
-                nodesDraggable={false}
-                nodesConnectable={false}
-                elementsSelectable={false}
-                zoomOnDoubleClick={false}
             >
                 <Background variant={BackgroundVariant.Cross} size={5} gap={90} lineWidth={1} color={"#777"}/>
             </ReactFlow>

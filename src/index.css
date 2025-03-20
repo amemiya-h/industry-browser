@@ -4,20 +4,8 @@
 }
 
 @font-face {
-  font-family: "eve-sans-neue";
-  src: url("/src/assets/fonts/evesansneue-bold.woff2") format("woff2");
-  font-weight: bold;
-}
-
-@font-face {
   font-family: "eve-sans-neue-condensed";
   src: url("/src/assets/fonts/evesansneue-condensed.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "eve-sans-neue-condensed";
-  src: url("/src/assets/fonts/evesansneue-condensedbold.woff2") format("woff2");
-  font-weight: bold;
 }
 
 @font-face {
@@ -29,6 +17,19 @@
   font-family: "eve-sans-neue-expanded";
   src: url("/src/assets/fonts/evesansneue-expandedbold.woff2") format("woff2");
   font-weight: bold;
+}
+
+@font-face {
+  font-family: "eve-sans-neue-expanded";
+  src: url("/src/assets/fonts/evesansneue-expandeditalic.woff2") format("woff2");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "eve-sans-neue-expanded";
+  src: url("/src/assets/fonts/evesansneue-expandedbolditalic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
 }
 
 :root {

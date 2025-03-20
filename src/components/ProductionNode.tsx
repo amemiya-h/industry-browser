@@ -1,37 +1,34 @@
-import fallback from "../assets/graphics/canvasUI/fallback.png"
+import {useState} from "react";
+import {Handle, Node, NodeProps, Position} from '@xyflow/react';
+import {QuantityToString} from "./industrylib.ts";
+import TypeIcon from './TypeIcon';
+import TYPE_TO_DESC_DATA from "../assets/data/desc_data_lookup.json";
 
-interface Props {
-    typeID: number;
-    quantity: number;
-}
+type ProductionNode = Node<{ typeID: number, quantity: number}, 'production'>
 
-const QuantityToString = (quantity: number) => {
-    const length = quantity.toString().length;
-    if (length < 5) {
-        return quantity.toLocaleString("en-US");
-    }else if (length == 5){
-        return (quantity/1e3).toFixed(2) + "K";
-    }else if (length < 9){
-        return (quantity/1e6).toFixed(2) + "M";
-    }else if (length < 12){
-        return (quantity/1e9).toFixed(2) + "B";
-    }else if (length < 15){
-        return (quantity/1e12).toFixed(2) + "T";
-    }else{
-        return (quantity/1e15).toFixed(2) + "Q";
-    }
-}
+const descData = Object.entries(TYPE_TO_DESC_DATA).map(([id, data]) => ({ id, data }));
 
-const ProductionNode = ({ typeID, quantity } : Props) => {
-    const typeIconURL : string = "https://images.evetech.net/types/" + typeID + "/icon?size=64";
+const ProductionNode = ({ data } : NodeProps<ProductionNode>) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const typeName : string = (data.typeID ? (descData.filter((type) => type.data.id == data.typeID))[0].data.name : "");
+    const typeGroup : string = (data.typeID ? (descData.filter((type) => type.data.id == data.typeID))[0].data.group : "");
     return (
-        <div className="h-[120px] w-[90px] bg-[url('./assets/graphics/canvasUI/bg.png')]">
+        <div className="nodrag relative h-[120px] w-[90px] bg-[url('./assets/graphics/canvasUI/bg.png')]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Handle type={"target"} position={Position.Top} style={{width:"0", height:"0", visibility: "hidden"}}/>
             <div className="h-[90px] w-[90px] relative inset-0 flex items-center justify-center">
-                <img src={typeID ? typeIconURL : fallback} alt="Type Icon" draggable="false"/>
+                <TypeIcon typeID={data.typeID}/>
             </div>
             <div className="h-[26px] w-[90px] relative top-[6px] left-0 flex items-center justify-center select-none">
-                <p>{QuantityToString(quantity)}</p>
+                <p className="text-sm-canvas">{QuantityToString(data.quantity, "short")}</p>
             </div>
+            {isHovered &&
+                <div className={`absolute right-[calc(100%+1em)] top-[50%] translate-y-[-50%] max-h-[120px] bg-window-light-active/80 border border-window-border-active text-regular-canvas flex flex-col items-end justify-center py-[0.5em]`}>
+                     <p className="text-regular-canvas text-right mx-[1em] text-nowrap">{typeName}</p>
+                     <p className="text-regular-canvas text-dim text-right mx-[1em] text-nowrap">{typeGroup}</p>
+                     <p className="text-regular-canvas text-dim text-right mx-[1em] text-nowrap">{`${QuantityToString(data.quantity, "long")} ${data.quantity == 1 ? "Unit" : "Units"}`}</p>
+                </div>
+            }
+            <Handle type={"source"} position={Position.Bottom} style={{width:"0", height:"0", visibility: "hidden"}}/>
         </div>
     )
 }

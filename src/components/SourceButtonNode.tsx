@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Handle, Node, NodeProps, Position} from '@xyflow/react';
 
 import sourcemanufacturingexpanded from "../assets/graphics/canvasUI/source/sourcemanufacturingexpanded.png"
 import sourcemanufacturingexpandedhover from "../assets/graphics/canvasUI/source/sourcemanufacturingexpandedhover.png"
@@ -25,12 +26,7 @@ import sourcepisuppressed from "../assets/graphics/canvasUI/source/sourcepisuppr
 import sourcepisuppressedhover from "../assets/graphics/canvasUI/source/sourcepisuppressedhover.png"
 import sourcepisuppressedpressed from "../assets/graphics/canvasUI/source/sourcepisuppressedpressed.png"
 
-
-interface Props {
-    state: "expanded" | "suppressed";
-    variant: "manufacturing" | "invention" | "reaction" | "pi";
-    onClick?: () => void;
-}
+type SourceButtonNode = Node<{ state: "expanded" | "suppressed", variant: "manufacturing" | "invention" | "reaction" | "pi", onClick?: () => void}, 'production'>
 
 const images = {
     expanded: {
@@ -79,7 +75,7 @@ const images = {
     },
 };
 
-const SourceButton = ({ state, variant, onClick }:Props) => {
+const SourceButtonNode = ({ data }:NodeProps<SourceButtonNode>) => {
     const [status, setStatus] = useState<"idle" | "hover" | "pressed">("idle");
     const [pressedInside, setPressedInside] = useState(false);
     const [isMousePressed, setIsMousePressed] = useState(false);
@@ -107,12 +103,12 @@ const SourceButton = ({ state, variant, onClick }:Props) => {
     const handleClick = () => {
         setPressedInside(false);
         setStatus("hover")
-        onClick?.();
+        data.onClick?.();
     };
 
     return (
         <button
-            className="w-fit h-fit border-none inline-block hover:cursor-pointer"
+            className="nodrag w-fit h-fit border-none inline-block hover:cursor-pointer"
             onMouseDown={handlePress}
             onMouseLeave={() => setStatus("idle")}
             onMouseEnter={() => {
@@ -125,14 +121,16 @@ const SourceButton = ({ state, variant, onClick }:Props) => {
             }}
             onClick={handleClick}
         >
+            <Handle type={"target"} position={Position.Top} style={{width:"0", height:"0", visibility: "hidden"}}/>
             <img
                 className="block"
-                src={images[state][variant][status]}
-                alt={`${state} ${variant} button`}
+                src={images[data.state][data.variant][status]}
+                alt={`${data.state} ${data.variant} button`}
                 draggable="false"
             />
+            <Handle type={"source"} position={Position.Bottom} style={{width:"0", height:"0", visibility: "hidden"}}/>
         </button>
     );
 }
 
-export default SourceButton
+export default SourceButtonNode

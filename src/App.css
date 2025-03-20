@@ -37,7 +37,11 @@
   @apply font-sans text-[10pt] tracking-wide;
 }
 
-.text-canvas{
+.text-regular-canvas{
+  @apply font-expanded text-[14pt];
+}
+
+.text-sm-canvas{
   @apply font-sans text-[16pt] tracking-wide;
 }
 
@@ -45,12 +49,12 @@
   @apply font-condensed text-[16pt];
 }
 
-.text-link{
-  @apply font-expanded text-[12pt] font-bold text-highlight hover:text-link hover:cursor-pointer;
-}
-
 .logo {
   @apply size-[2em] m-[1em]
+}
+
+a {
+  @apply font-expanded text-[12pt] font-bold text-highlight hover:text-link hover:cursor-pointer;
 }
 
 .App {
