@@ -21,7 +21,7 @@ const Viewport = () => {
 
     const initialNodes : Node[] = [
         { id: '1', type: 'production', position: { x: 0, y: 0 }, data: { typeID: 626, quantity: 1 }},
-        { id: '2', type: 'sourceButton', position: { x: 0, y: 150 }, data: { state: "suppressed", variant: "manufacturing" }},
+        { id: '2', type: 'sourceButton', position: { x: 0, y: 150 }, data: { state: "expanded", variant: "manufacturing" }},
         { id: '3', type: 'production', position: { x: -450, y: 300 }, data: { typeID: 34, quantity: 540000 }},
         { id: '4', type: 'production', position: { x: -300, y: 300 }, data: { typeID: 35, quantity: 180000 }},
         { id: '5', type: 'production', position: { x: -150, y: 300 }, data: { typeID: 36, quantity: 36000 }},

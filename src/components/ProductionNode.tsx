@@ -13,7 +13,7 @@ const ProductionNode = ({ data } : NodeProps<ProductionNode>) => {
     const typeName : string = (data.typeID ? (descData.filter((type) => type.data.id == data.typeID))[0].data.name : "");
     const typeGroup : string = (data.typeID ? (descData.filter((type) => type.data.id == data.typeID))[0].data.group : "");
     return (
-        <div className="nodrag relative h-[120px] w-[90px] bg-[url('./assets/graphics/canvasUI/bg.png')]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className="nodrag relative h-[120px] w-[90px] hover:cursor-default bg-[url('./assets/graphics/canvasUI/bg.png')]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <Handle type={"target"} position={Position.Top} style={{width:"0", height:"0", visibility: "hidden"}}/>
             <div className="h-[90px] w-[90px] relative inset-0 flex items-center justify-center">
                 <TypeIcon typeID={data.typeID}/>

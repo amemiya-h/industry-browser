@@ -13,7 +13,7 @@ interface Props {
 
 const SearchBar = ({ setQuery, setResult, suggestions = [] }: Props) => {
     const [focused, setFocused] = useState(false);
-    const [highlightedIndex, setHighlightedIndex] = useState(-1);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const highlightedSuggestionRef = useRef<HTMLDivElement>(null);
