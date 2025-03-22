@@ -53,25 +53,6 @@ interface Edge {
     target: string;
 }
 
-interface DAGNode {
-    id: string; // Unique identifier for the node
-    typeID: number;
-    quantity: number; // Total quantity aggregated from all occurrences
-    state: "expanded" | "collapsed";
-    depth: number;
-    productionType: "manufacturing" | "invention" | "reaction" | "pi" | "";
-}
-
-interface DAGEdge {
-    source: string; // Source node ID
-    target: string; // Target node ID
-}
-
-interface DirectedAcyclicGraph {
-    nodes: DAGNode[];
-    edges: DAGEdge[];
-}
-
 const schemesLookup = schemesLookupData as SchemesLookup;
 const schemes = schemesData as Schemes;
 
@@ -120,7 +101,7 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
         if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
             const recipe: Scheme = schemes[schemeID];
             node.productionType = recipe.type as "manufacturing" | "invention" | "reaction" | "pi"
-            if (node.productionType === "pi") {
+            if (node.productionType != "manufacturing" || ([4247, 4246, 4051, 4312].includes(node.typeID))) {
                 node.state = "collapsed";
             }
             recipe.materials.forEach((material: Material) => {
@@ -172,9 +153,6 @@ export function computeNodePositions(
 
     return positions;
 }
-
-
-
 
 export function generateDisplayNodes(tree: MaterialTree, separation: number = 20): DisplayNode[] {
     const positions = computeNodePositions(tree, separation);
@@ -232,143 +210,3 @@ export function generateConnections(tree: MaterialTree, edges: Edge[] = []): Edg
 
     return edges;
 }
-
-export function materialTreeToDAG(tree: MaterialTree): DirectedAcyclicGraph {
-    const nodeMap = new Map<number, DAGNode>(); // Unique nodes by typeID
-    const edges: DAGEdge[] = []; // Array to store edges
-
-    function traverse(node: MaterialTree, parentId: string | null = null): void {
-        // Create or update the DAG node for the current material
-        if (!nodeMap.has(node.typeID)) {
-            nodeMap.set(node.typeID, {
-                id: node.typeID.toString(),
-                typeID: node.typeID,
-                quantity: node.quantity,
-                state: node.state,
-                depth: node.depth,
-                productionType: node.productionType,
-            });
-        } else {
-            const dagNode = nodeMap.get(node.typeID)!;
-            dagNode.quantity += node.quantity;
-            dagNode.depth = Math.max(dagNode.depth, node.depth);
-        }
-
-        // If there is a parent, add an edge from the parent (product) to the current material
-        if (parentId) {
-            edges.push({
-                source: parentId,
-                target: node.typeID.toString(),
-            });
-        }
-
-        // Recursively process children
-        node.children.forEach(child => traverse(child, node.typeID.toString()));
-    }
-
-    // Start traversal from the root
-    traverse(tree);
-
-    // Prune redundant edges by keeping only unique source-target pairs
-    const uniqueEdgesMap = new Map<string, DAGEdge>();
-    edges.forEach(edge => {
-        const key = `${edge.source}-${edge.target}`;
-        if (!uniqueEdgesMap.has(key)) {
-            uniqueEdgesMap.set(key, edge);
-        }
-    });
-    const uniqueEdges = Array.from(uniqueEdgesMap.values());
-
-    // Convert the node map to an array
-    const nodes = Array.from(nodeMap.values());
-    return { nodes, edges: uniqueEdges };
-}
-
-
-export function computeNodePositionsDAG(
-    nodes: DAGNode[],
-    edges: DAGEdge[],
-    typeToDesc: { [key: string]: { group: string } },
-    layerSeparation: number = 200,  // Increased vertical spacing
-    nodeSeparation: number = 150    // Increased horizontal spacing
-): Map<string, { x: number; y: number }> {
-    const positions = new Map<string, { x: number; y: number }>();
-    const nodeLayer = new Map<string, number>();
-
-    // Build maps of incoming and outgoing edges for clarity.
-    const incomingEdges = new Map<string, DAGEdge[]>();
-    const outgoingEdges = new Map<string, DAGEdge[]>();
-    edges.forEach(edge => {
-        if (!incomingEdges.has(edge.target)) {
-            incomingEdges.set(edge.target, []);
-        }
-        incomingEdges.get(edge.target)!.push(edge);
-
-        if (!outgoingEdges.has(edge.source)) {
-            outgoingEdges.set(edge.source, []);
-        }
-        outgoingEdges.get(edge.source)!.push(edge);
-    });
-
-    // Step 1: Initialize layers.
-    // Base materials (nodes with no outgoing edges) are set to layer 0.
-    nodes.forEach(node => {
-        if (!outgoingEdges.has(node.id)) {
-            // Base material: no children
-            nodeLayer.set(node.id, 0);
-        } else {
-            nodeLayer.set(node.id, 0);
-        }
-    });
-
-    // Step 2: Propagate layers upward.
-    // For each edge (from product to material), the product should be placed one layer above the material.
-    let changed = true;
-    while (changed) {
-        changed = false;
-        edges.forEach(edge => {
-            const materialLayer = nodeLayer.get(edge.target) ?? 0;
-            const newProductLayer = materialLayer + 1;
-            const currentProductLayer = nodeLayer.get(edge.source) ?? 0;
-            if (newProductLayer > currentProductLayer) {
-                nodeLayer.set(edge.source, newProductLayer);
-                changed = true;
-            }
-        });
-    }
-
-    // Step 3: Find the maximum layer depth to correctly invert Y positions.
-    const maxLayer = Math.max(...nodeLayer.values());
-
-    // Step 4: Group nodes by layer.
-    const layerNodes = new Map<number, string[]>();
-    nodeLayer.forEach((layer, nodeId) => {
-        if (!layerNodes.has(layer)) {
-            layerNodes.set(layer, []);
-        }
-        layerNodes.get(layer)!.push(nodeId);
-    });
-
-    // Step 5: Sort nodes within each layer by group.
-    layerNodes.forEach((nodeIds, layer) => {
-        nodeIds.sort((a, b) => {
-            const groupA = typeToDesc[a] ? typeToDesc[a].group : "";
-            const groupB = typeToDesc[b] ? typeToDesc[b].group : "";
-            return groupA.localeCompare(groupB);
-        });
-
-        // Calculate horizontal starting position for this layer.
-        const totalWidth = nodeIds.length * nodeSeparation;
-        const startX = -totalWidth / 2;
-        nodeIds.forEach((nodeId, index) => {
-            positions.set(nodeId, {
-                x: startX + index * (nodeSeparation + 40),
-                // Invert Y so base materials are at the bottom
-                y: (maxLayer - layer) * layerSeparation
-            });
-        });
-    });
-
-    return positions;
-}
-

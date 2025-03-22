@@ -73,39 +73,6 @@ const Viewport = () => {
     const edges = useMemo(() => {
         return activeTree ? generateConnections(activeTree) : [];
     }, [activeTree]);
-
-    // Generate DAG data from the active tree
-    // const dag = useMemo(() => {
-    //     return activeTree ? materialTreeToDAG(activeTree) : { nodes: [], edges: [] };
-    // }, [activeTree]);
-    //
-    // const { typeToDesc } = useDescData()
-    //
-    // // Compute positions for DAG nodes
-    // const positions = useMemo(() => {
-    //     return computeNodePositionsDAG(dag.nodes, dag.edges, typeToDesc);
-    // }, [dag.edges, dag.nodes, typeToDesc]);
-    //
-    // // Map DAG nodes to display nodes with computed positions
-    // const displayNodes = useMemo(() => {
-    //     return dag.nodes.map((node) => ({
-    //         id: node.id,
-    //         type: "production",
-    //         position: positions.get(node.id) || { x: 0, y: 0 },
-    //         data: { typeID: node.typeID, quantity: node.quantity },
-    //     }));
-    // }, [dag.nodes, positions]);
-    //
-    // // Use DAG edges directly
-    // const displayEdges = useMemo(() => {
-    //     return dag.edges.map((edge) => ({
-    //         id: `${edge.source}-${edge.target}`,
-    //         source: edge.source,
-    //         target: edge.target,
-    //         type: "simplebezier"
-    //     }));
-    // }, [dag.edges]);
-
     return (
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
             <Canvas nodes={nodes} edges={edges} />

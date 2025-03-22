@@ -56,6 +56,12 @@ const Overlay= ({isOpen, closeOverlay} : OverlayProps) => {
                             License</a>.
                         </p>
                         <p className="text-regular m-[1em]">
+                            <a href={"https://d3js.org/d3-hierarchy"} className={"text-link"}>d3-hierarchy</a> ©
+                            2010-2021 Mike Bostock. Licensed under the <a
+                            href={"https://github.com/d3/d3-hierarchy?tab=ISC-1-ov-file#readme"} className={"text-link"}>ISC
+                            License</a>.
+                        </p>
+                        <p className="text-regular m-[1em]">
                             Special thanks to L.K.
                         </p>
                         <p className="text-regular text-dim m-[1em]">
