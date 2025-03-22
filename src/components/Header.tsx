@@ -26,8 +26,7 @@ const Overlay= ({isOpen, closeOverlay} : OverlayProps) => {
                     <div className="overflow-auto mx-[1em]">
                         <p className="text-regular m-[1em]">
                             Born from a personal need and an empty niche to visualize the full size of EVE Online's
-                            comprehensive industry simulation, this tool distills the chaos of blueprints and materials
-                            into a clear, interactive crafting tree.
+                            comprehensive industry simulation.
                         </p>
                         <p className="text-regular m-[1em]">
                             Use the search bar on the top left to display production trees. Subsections can be hidden

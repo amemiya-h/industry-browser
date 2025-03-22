@@ -129,12 +129,12 @@ export function toggleNode(tree: MaterialTree, targetId: number): MaterialTree {
 
 export function computeNodePositions(
     root: MaterialTree,
-    margin: number = 20
+    margin: number[] = [20, 60]
 ): Map<string, { x: number; y: number }> {
     const positions = new Map<string, { x: number; y: number }>();
 
-    const nodeWidth = 90 + 2 * margin;
-    const nodeHeight = 170 + 2 * margin;
+    const nodeWidth = 90 + 2 * margin[0];
+    const nodeHeight = 170 + 2 * margin[1];
 
     const d3Root = hierarchy(root, (node) => (node.state === "expanded" ? node.children : []));
 
@@ -154,7 +154,7 @@ export function computeNodePositions(
     return positions;
 }
 
-export function generateDisplayNodes(tree: MaterialTree, separation: number = 20): DisplayNode[] {
+export function generateDisplayNodes(tree: MaterialTree, separation: number[] = [20, 60]): DisplayNode[] {
     const positions = computeNodePositions(tree, separation);
 
     const getPosition = (id: number | string): { x: number; y: number } =>
