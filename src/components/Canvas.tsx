@@ -1,8 +1,25 @@
-import {Background, BackgroundVariant, ReactFlow, Viewport, Node} from '@xyflow/react';
+import {Background, BackgroundVariant, ReactFlow, Viewport} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-import ProductionNode from "./ProductionNode.tsx";
-import SourceButtonNode from "./SourceButtonNode.tsx";
+import Production from "./Production.tsx";
+import SourceButton from "./SourceButton.tsx";
+import React, { useMemo } from "react";
+
+interface ProductionNode {
+    id: string;
+    type: "production";
+    position: { x: number; y: number };
+    data: { typeID: number; quantity: number };
+}
+
+interface ButtonNode {
+    id: string;
+    type: "sourceButton";
+    position: { x: number; y: number };
+    data: { state: "expanded" | "collapsed"; variant: "manufacturing" | "invention" | "reaction" | "pi" | ""; parentID: number };
+}
+
+type DisplayNode = ProductionNode | ButtonNode;
 
 interface Edge {
     id: string;
@@ -11,21 +28,26 @@ interface Edge {
 }
 
 interface Props {
-    nodes: Node[];
+    nodes: DisplayNode[];
     edges: Edge[];
 }
 
-const nodeTypes = {'production': ProductionNode, 'sourceButton': SourceButtonNode};
+const nodeTypes = {'production': Production, 'sourceButton': SourceButton};
 
-const getViewportCenter = (node: Node, zoom = 1): Viewport => {
+const getViewportCenter = (node: DisplayNode, zoom = 1): Viewport => {
     const centerX = node.position.x + window.innerWidth/2;
     const centerY = node.position.y + window.innerHeight/6;
-    console.log(centerX, centerY, zoom);
     return { x: centerX, y: centerY, zoom };
 };
 
-const Canvas = ({ nodes, edges } : Props) => {
-    const defaultViewport = getViewportCenter(nodes[0], 0.5);
+const Canvas = React.memo(({ nodes, edges } : Props) => {
+    const defaultViewport = useMemo(() => {
+        if (nodes.length > 0) {
+            return getViewportCenter(nodes[0], 0.5);
+        }
+        return { x: 0, y: 0, zoom: 0.5 };
+    }, [nodes]);
+
     return (
         <div className="flex-1 relative overflow-hidden z-10 bg-window-dark">
             <ReactFlow
@@ -42,6 +64,6 @@ const Canvas = ({ nodes, edges } : Props) => {
             </ReactFlow>
         </div>
     );
-}
+});
 
 export default Canvas;

@@ -1,45 +1,38 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import * as fuzzysort from "fuzzysort";
 
 import Canvas from "./Canvas.tsx";
 import Sidebar from "./Sidebar.tsx";
 import NAME_TO_TYPE from "../assets/data/type_lookup.json";
 import SearchBar from "./SearchBar.tsx";
-import {Node} from "@xyflow/react";
+import {useActiveRoot, useSuppressSignalContext} from "./ViewportContext.tsx";
+import {generateConnections, generateDisplayNodes, getTree, toggleNode} from "./industrylib.ts";
 
 interface Item {
     name: string;
     id: number;
 }
+
+interface MaterialTree {
+    id: number;
+    typeID: number;
+    quantity: number;
+    state: "expanded"|"collapsed",
+    depth: number;
+    productionType: "manufacturing" | "invention" | "reaction" | "pi" | "";
+    children: MaterialTree[];
+}
+
 const items = Object.entries(NAME_TO_TYPE).map(([name, id]) => ({ name, id }));
 
 const Viewport = () => {
     const [collapsed, setCollapsed] = useState(true);
     const [query, setQuery] = useState('');
-    const [result, setResult] = useState<Item | null>(null);
     const [suggestions, setSuggestions] = useState<Item[]>([]);
+    const [activeTree, setActiveTree] = useState<MaterialTree | null>(null);
 
-    const initialNodes : Node[] = [
-        { id: '1', type: 'production', position: { x: 0, y: 0 }, data: { typeID: 626, quantity: 1 }},
-        { id: '2', type: 'sourceButton', position: { x: 0, y: 150 }, data: { state: "expanded", variant: "manufacturing" }},
-        { id: '3', type: 'production', position: { x: -450, y: 300 }, data: { typeID: 34, quantity: 540000 }},
-        { id: '4', type: 'production', position: { x: -300, y: 300 }, data: { typeID: 35, quantity: 180000 }},
-        { id: '5', type: 'production', position: { x: -150, y: 300 }, data: { typeID: 36, quantity: 36000 }},
-        { id: '6', type: 'production', position: { x: 0, y: 300 }, data: { typeID: 37, quantity: 10000 }},
-        { id: '7', type: 'production', position: { x: 150, y: 300 }, data: { typeID: 38, quantity: 1500 }},
-        { id: '8', type: 'production', position: { x: 300, y: 300 }, data: { typeID: 39, quantity: 350 }},
-        { id: '9', type: 'production', position: { x: 450, y: 300 }, data: { typeID: 40, quantity: 140 }},
-    ];
-    const initialEdges = [
-        { id: 'e1-2', source: '1', target: '2' },
-        { id: 'e2-3', source: '2', target: '3' },
-        { id: 'e2-4', source: '2', target: '4' },
-        { id: 'e2-5', source: '2', target: '5' },
-        { id: 'e2-6', source: '2', target: '6' },
-        { id: 'e2-7', source: '2', target: '7' },
-        { id: 'e2-8', source: '2', target: '8' },
-        { id: 'e2-9', source: '2', target: '9' },
-    ];
+    const {activeRoot, setActiveRoot} = useActiveRoot();
+    const {signalData, setSignalData} = useSuppressSignalContext();
 
     useEffect(() => {
         if (query) {
@@ -50,15 +43,37 @@ const Viewport = () => {
         }
     }, [query]);
 
+    useEffect(() => {
+        if(activeTree && signalData) {
+            console.log(signalData);
+            setActiveTree(toggleNode(activeTree, signalData));
+        }
+        setSignalData(null)
+    }, [signalData, setSignalData, activeTree]);
+
+    useEffect(() => {
+        if(activeRoot){
+            setActiveTree(getTree(activeRoot.id))
+        }
+    }, [activeRoot]);
+
+    const nodes = useMemo(() => {
+        return activeTree ? generateDisplayNodes(activeTree, 20) : [];
+    }, [activeTree]);
+
+    const edges = useMemo(() => {
+        return activeTree ? generateConnections(activeTree) : [];
+    }, [activeTree]);
+
     return (
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
-            <Canvas nodes={initialNodes} edges={initialEdges}/>
+            <Canvas nodes={nodes} edges={edges}/>
 
             <div className="absolute z-20 top-[1em] left-[1em]">
-                <SearchBar setQuery={setQuery} setResult={setResult} suggestions={suggestions}/>
+                <SearchBar setQuery={setQuery} setResult={setActiveRoot} suggestions={suggestions}/>
             </div>
 
-            <Sidebar collapsed = {collapsed} setCollapsed = {setCollapsed} typeID={result?.id}/>
+            <Sidebar collapsed = {collapsed} setCollapsed = {setCollapsed} typeID={activeRoot?.id}/>
         </div>
     )
 }

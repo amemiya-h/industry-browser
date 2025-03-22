@@ -1,10 +1,8 @@
 import info from "../assets/graphics/info.png";
 import chevron_left from "../assets/graphics/chevron_left_double_16px.png";
 import chevron_right from "../assets/graphics/chevron_right_double_16px.png";
-import TYPE_TO_DESC_DATA from "../assets/data/desc_data_lookup.json";
 import TypeIcon from "./TypeIcon.tsx";
-
-const descData = Object.entries(TYPE_TO_DESC_DATA).map(([id, data]) => ({ id, data }));
+import {useDescData} from "./ViewportContext.tsx";
 
 interface Props{
     typeID?: number;
@@ -13,10 +11,12 @@ interface Props{
 }
 
 const SidebarContent = ( collapsed : boolean, typeID : number ) => {
-    const typeName : string = (typeID ? (descData.filter((type) => type.data.id == typeID))[0].data.name : "");
-    const typeDesc : string = (typeID ? (descData.filter((type) => type.data.id == typeID))[0].data.description : "");
-    const typeGroup : string = (typeID ? (descData.filter((type) => type.data.id == typeID))[0].data.group : "");
-    const typeCategory : string = (typeID ? (descData.filter((type) => type.data.id == typeID))[0].data.category : "");
+    const { typeToDesc } = useDescData();
+
+    const typeName : string = (typeID ? typeToDesc[typeID.toString()].name : "");
+    const typeDesc : string = (typeID ? typeToDesc[typeID.toString()].description : "");
+    const typeGroup : string = (typeID ? typeToDesc[typeID.toString()].group : "");
+    const typeCategory : string = (typeID ? typeToDesc[typeID.toString()].category : "");
 
     if (!collapsed) {
         return (
