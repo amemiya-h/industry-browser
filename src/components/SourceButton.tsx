@@ -25,8 +25,9 @@ import sourcereactionsuppressedpressed from "../assets/graphics/canvasUI/source/
 import sourcepisuppressed from "../assets/graphics/canvasUI/source/sourcepisuppressed.png"
 import sourcepisuppressedhover from "../assets/graphics/canvasUI/source/sourcepisuppressedhover.png"
 import sourcepisuppressedpressed from "../assets/graphics/canvasUI/source/sourcepisuppressedpressed.png"
+import {useSuppressSignalContext} from "./ViewportContext.tsx";
 
-type SourceButtonNode = Node<{ state: "expanded" | "suppressed", variant: "manufacturing" | "invention" | "reaction" | "pi", onClick?: () => void}, 'production'>
+type SourceButton = Node<{ state: "expanded" | "collapsed", variant: "manufacturing" | "invention" | "reaction" | "pi", parentID: number}, 'button'>
 
 const images = {
     expanded: {
@@ -51,7 +52,7 @@ const images = {
             pressed: sourcepiexpandedpressed,
         },
     },
-    suppressed: {
+    collapsed: {
         manufacturing: {
             idle: sourcemanufacturingsuppressed,
             hover: sourcemanufacturingsuppressedhover,
@@ -75,10 +76,11 @@ const images = {
     },
 };
 
-const SourceButtonNode = ({ data }:NodeProps<SourceButtonNode>) => {
+const SourceButton = ({ data }:NodeProps<SourceButton>) => {
     const [status, setStatus] = useState<"idle" | "hover" | "pressed">("idle");
     const [pressedInside, setPressedInside] = useState(false);
     const [isMousePressed, setIsMousePressed] = useState(false);
+    const {setSignalData} = useSuppressSignalContext();
 
     useEffect(() => {
         const handleMouseDown = () => setIsMousePressed(true);
@@ -103,7 +105,7 @@ const SourceButtonNode = ({ data }:NodeProps<SourceButtonNode>) => {
     const handleClick = () => {
         setPressedInside(false);
         setStatus("hover")
-        data.onClick?.();
+        setSignalData(data.parentID)
     };
 
     return (
@@ -133,4 +135,4 @@ const SourceButtonNode = ({ data }:NodeProps<SourceButtonNode>) => {
     );
 }
 
-export default SourceButtonNode
+export default SourceButton
