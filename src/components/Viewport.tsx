@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom"; // Import useSearchParams
 import * as fuzzysort from "fuzzysort";
 
 import Canvas from "./Canvas.tsx";
@@ -39,6 +40,23 @@ const Viewport = () => {
 
     const { activeRoot, setActiveRoot } = useActiveRoot();
     const { signalData, setSignalData } = useSuppressSignalContext();
+    const [searchParams, setSearchParams] = useSearchParams(); // Initialize search params
+
+    useEffect(() => {
+        // Sync activeTree with URL query parameter
+        const rootId = searchParams.get("rootId");
+        if (rootId) {
+            const root = items.find((item) => item.id === parseInt(rootId, 10));
+            if (root) setActiveRoot(root);
+        }
+    }, [searchParams, setActiveRoot]);
+
+    useEffect(() => {
+        if (activeRoot) {
+            setActiveTree(getTree(activeRoot.id));
+            setSearchParams({ rootId: activeRoot.id.toString() }); // Update URL when activeRoot changes
+        }
+    }, [activeRoot, setSearchParams]);
 
     useEffect(() => {
         if (query) {
@@ -89,8 +107,6 @@ const Viewport = () => {
     const edges = useMemo(() => {
         return activeTree ? generateConnections(activeTree) : [];
     }, [activeTree]);
-
-
 
     return (
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
