@@ -145,21 +145,23 @@ function computeNodePositions(root: MaterialTree, separation: number = 20): Map<
             node.x = (firstChild.x! + lastChild.x!) / 2;
         }
 
-        node.y = depth * (170 + 2*separation); // Height per level (production + button)
+        node.y = depth * (170 + 2 * separation); // Height per level (production + button)
     }
 
-    function secondWalk(node: MaterialTree): void {
-        positions.set(String(node.id), { x: node.x!, y: node.y! });
+    function secondWalk(node: MaterialTree, offsetX: number = 0): void {
+        const adjustedX = node.x! - offsetX;
+        positions.set(String(node.id), { x: adjustedX, y: node.y! });
 
         if (node.productionType !== "") {
-            positions.set(`b${node.id}`, { x: node.x!, y: node.y! + 85 + separation });
+            positions.set(`b${node.id}`, { x: adjustedX, y: node.y! + 85 + separation });
         }
 
-        node.children.forEach(child => secondWalk(child));
+        node.children.forEach(child => secondWalk(child, offsetX));
     }
 
     firstWalk(root, 0);
-    secondWalk(root);
+    const rootX = root.x!;
+    secondWalk(root, rootX);
 
     return positions;
 }

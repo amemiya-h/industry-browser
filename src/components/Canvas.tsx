@@ -1,9 +1,9 @@
-import {Background, BackgroundVariant, ReactFlow, Viewport} from '@xyflow/react';
+import {Background, BackgroundVariant, ReactFlow} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import Production from "./Production.tsx";
 import SourceButton from "./SourceButton.tsx";
-import React, { useMemo } from "react";
+import React from "react";
 
 interface ProductionNode {
     id: string;
@@ -34,19 +34,8 @@ interface Props {
 
 const nodeTypes = {'production': Production, 'sourceButton': SourceButton};
 
-const getViewportCenter = (node: DisplayNode, zoom = 1): Viewport => {
-    const centerX = node.position.x + window.innerWidth/2;
-    const centerY = node.position.y + window.innerHeight/6;
-    return { x: centerX, y: centerY, zoom };
-};
-
 const Canvas = React.memo(({ nodes, edges } : Props) => {
-    const defaultViewport = useMemo(() => {
-        if (nodes.length > 0) {
-            return getViewportCenter(nodes[0], 0.5);
-        }
-        return { x: 0, y: 0, zoom: 0.5 };
-    }, [nodes]);
+    const defaultViewport = {x: window.innerWidth / 2, y: window.innerHeight / 6, zoom: 0.5};
 
     return (
         <div className="flex-1 relative overflow-hidden z-10 bg-window-dark">
