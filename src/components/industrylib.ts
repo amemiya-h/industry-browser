@@ -94,7 +94,7 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
         id: getUniqueId(isRoot),
         typeID,
         quantity: multiplier,
-        state: "collapsed",
+        state: "expanded",
         depth: depth,
         productionType: "",
         children: []
