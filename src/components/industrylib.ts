@@ -100,12 +100,16 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
         children: []
     };
 
+
     const typeIDStr = typeID.toString();
     if (Object.prototype.hasOwnProperty.call(schemesLookup, typeIDStr)) {
         const schemeID = schemesLookup[typeIDStr].toString();
         if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
             const recipe: Scheme = schemes[schemeID];
             node.productionType = recipe.type as "manufacturing" | "invention" | "reaction" | "pi"
+            if (node.productionType === "pi") {
+                node.state = "collapsed";
+            }
             recipe.materials.forEach((material: Material) => {
                 const childTree = getTree(material.typeID, material.quantity * multiplier, false, depth + 1);
                 node.children.push(childTree);

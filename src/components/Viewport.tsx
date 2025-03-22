@@ -58,7 +58,7 @@ const Viewport = () => {
     }, [activeRoot]);
 
     const nodes = useMemo(() => {
-        return activeTree ? generateDisplayNodes(activeTree, 20) : [];
+        return activeTree ? generateDisplayNodes(activeTree, 40) : [];
     }, [activeTree]);
 
     const edges = useMemo(() => {
