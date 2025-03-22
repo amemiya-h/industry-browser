@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Handle, Node, NodeProps, Position} from '@xyflow/react';
 
 import sourcemanufacturingexpanded from "../assets/graphics/canvasUI/source/sourcemanufacturingexpanded.png"
@@ -76,7 +76,7 @@ const images = {
     },
 };
 
-const SourceButton = ({ data }:NodeProps<SourceButton>) => {
+const SourceButton = React.memo(({ data }:NodeProps<SourceButton>) => {
     const [status, setStatus] = useState<"idle" | "hover" | "pressed">("idle");
     const [pressedInside, setPressedInside] = useState(false);
     const [isMousePressed, setIsMousePressed] = useState(false);
@@ -133,6 +133,6 @@ const SourceButton = ({ data }:NodeProps<SourceButton>) => {
             <Handle type={"source"} position={Position.Bottom} style={{width:"0", height:"0", visibility: "hidden"}}/>
         </button>
     );
-}
+})
 
 export default SourceButton

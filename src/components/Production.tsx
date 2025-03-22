@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {Handle, Node, NodeProps, Position} from '@xyflow/react';
 import {quantityToString} from "./industrylib.ts";
 import TypeIcon from './TypeIcon';
@@ -6,7 +6,7 @@ import {useDescData} from "./ViewportContext.tsx";
 
 type Production = Node<{ typeID: number, quantity: number}, 'production'>
 
-const Production = ({ data } : NodeProps<Production>) => {
+const Production = React.memo(({ data } : NodeProps<Production>) => {
     const [isHovered, setIsHovered] = useState(false);
     const { typeToDesc } = useDescData()
 
@@ -31,6 +31,6 @@ const Production = ({ data } : NodeProps<Production>) => {
             <Handle type={"source"} position={Position.Bottom} style={{width:"0", height:"0", visibility: "hidden"}}/>
         </div>
     )
-}
+})
 
 export default Production;

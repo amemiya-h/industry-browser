@@ -94,7 +94,7 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
         id: getUniqueId(isRoot),
         typeID,
         quantity: multiplier,
-        state: "expanded",
+        state: "collapsed",
         depth: depth,
         productionType: "",
         children: []
@@ -152,7 +152,7 @@ function computeNodePositions(root: MaterialTree, separation: number = 20): Map<
         positions.set(String(node.id), { x: node.x!, y: node.y! });
 
         if (node.productionType !== "") {
-            positions.set(`b${node.id}`, { x: node.x!, y: node.y! + 120 + separation });
+            positions.set(`b${node.id}`, { x: node.x!, y: node.y! + 85 + separation });
         }
 
         node.children.forEach(child => secondWalk(child));
@@ -164,11 +164,9 @@ function computeNodePositions(root: MaterialTree, separation: number = 20): Map<
     return positions;
 }
 
-export function generateDisplayNodes(tree: MaterialTree, separation: number = 200): DisplayNode[] {
-    // Compute positions using the Tidy Tree Algorithm.
+export function generateDisplayNodes(tree: MaterialTree, separation: number = 20): DisplayNode[] {
     const positions = computeNodePositions(tree, separation);
 
-    // Get the x, y position for a given node ID.
     const getPosition = (id: number | string): { x: number; y: number } =>
         positions.get(String(id)) || { x: 0, y: 0 };
 
@@ -177,7 +175,6 @@ export function generateDisplayNodes(tree: MaterialTree, separation: number = 20
     function traverse(node: MaterialTree): void {
         const pos = getPosition(node.id);
 
-        // Create production node.
         const productionNode: ProductionNode = {
             id: node.id.toString(),
             type: "production",
@@ -186,7 +183,6 @@ export function generateDisplayNodes(tree: MaterialTree, separation: number = 20
         };
         nodes.push(productionNode);
 
-        // If the node has a production type, add a button node.
         if (node.productionType !== "") {
             const buttonId = `b${node.id}`;
             nodes.push({
@@ -197,14 +193,11 @@ export function generateDisplayNodes(tree: MaterialTree, separation: number = 20
             });
         }
 
-        // If collapsed, do not traverse children.
         if (node.state === "collapsed") return;
 
-        // Recursively process children.
         node.children.forEach(traverse);
     }
 
-    // Start traversal.
     traverse(tree);
 
     return nodes;
