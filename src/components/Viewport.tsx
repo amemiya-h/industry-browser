@@ -7,12 +7,9 @@ import NAME_TO_TYPE from "../assets/data/type_lookup.json";
 import SearchBar from "./SearchBar.tsx";
 import {
     useActiveRoot,
-    //useDescData,
     useSuppressSignalContext
 } from "./ViewportContext.tsx";
 import {
-    //materialTreeToDAG,
-    //computeNodePositionsDAG,
     getTree,
     toggleNode, generateDisplayNodes, generateConnections,
 } from "./industrylib.ts";
@@ -66,13 +63,35 @@ const Viewport = () => {
         }
     }, [activeRoot]);
 
+    const toggleProductionType = (type: "manufacturing" | "reaction" | "pi" | "specific") => {
+        if (!activeTree) return;
+
+        function traverseAndToggle(node: MaterialTree): MaterialTree {
+            const updatedChildren = node.children.map(traverseAndToggle);
+
+            if (
+                (type === "specific" && [4247, 4246, 4051, 4312].includes(node.typeID)) ||
+                (type !== "specific" && node.productionType === type)
+            ) {
+                return toggleNode({ ...node, children: updatedChildren }, node.id);
+            }
+
+            return { ...node, children: updatedChildren };
+        }
+
+        setActiveTree(traverseAndToggle(activeTree));
+    };
+
     const nodes = useMemo(() => {
-        return activeTree ? generateDisplayNodes(activeTree, 40) : [];
+        return activeTree ? generateDisplayNodes(activeTree, 60) : [];
     }, [activeTree]);
 
     const edges = useMemo(() => {
         return activeTree ? generateConnections(activeTree) : [];
     }, [activeTree]);
+
+
+
     return (
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
             <Canvas nodes={nodes} edges={edges} />
@@ -81,7 +100,39 @@ const Viewport = () => {
                 <SearchBar setQuery={setQuery} setResult={setActiveRoot} suggestions={suggestions} />
             </div>
 
-            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} typeID={activeRoot?.id} />
+            <div className="absolute z-20 bottom-[1em] left-[1em] flex flex-col gap-2">
+                <button
+                    onClick={() => toggleProductionType("manufacturing")}
+                    className="text-sm text-highlight px-[1em] py-[0.5em] border border-manufacture-yellow bg-manufacture-yellow/40 hover:cursor-pointer hover:bg-manufacture-yellow/60"
+                >
+                    Toggle Manufacturing
+                </button>
+                <button
+                    onClick={() => toggleProductionType("reaction")}
+                    className="text-sm text-highlight px-[1em] py-[0.5em] border border-reaction-cyan bg-reaction-cyan/40 hover:cursor-pointer hover:bg-reaction-cyan/60"
+                >
+                    Toggle Reaction
+                </button>
+                <button
+                    onClick={() => toggleProductionType("pi")}
+                    className="text-sm text-highlight px-[1em] py-[0.5em] border border-pi-green bg-pi-green/40 hover:cursor-pointer hover:bg-pi-green/60"
+                >
+                    Toggle PI
+                </button>
+                <button
+                    onClick={() => toggleProductionType("specific")}
+                    className="text-sm text-highlight px-[1em] py-[0.5em] border border-secondary bg-secondary/40 hover:cursor-pointer hover:bg-secondary/60"
+                >
+                    Toggle Fuel Blocks
+                </button>
+            </div>
+
+            <Sidebar 
+                collapsed={collapsed} 
+                setCollapsed={setCollapsed} 
+                typeID={activeRoot?.id} 
+                activeTree={activeTree}
+            />
         </div>
     );
 };

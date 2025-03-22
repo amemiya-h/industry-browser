@@ -51,6 +51,7 @@ interface Edge {
     id: string;
     source: string;
     target: string;
+    type?: string;
 }
 
 const schemesLookup = schemesLookupData as SchemesLookup;
@@ -60,16 +61,15 @@ export function quantityToString(quantity: number, format: "long"|"short") {
     if (format === "long") {
         return quantity.toLocaleString("en-US");
     } else if (format === "short") {
-        const length = quantity.toString().length;
-        if (length < 5) {
-            return quantity.toLocaleString("en-US");
-        }else if (length == 5){
+        if (quantity < 1e4) {
+            return quantity.toLocaleString("en-US").slice(0, 5);
+        }else if (quantity < 1e5){
             return (quantity/1e3).toFixed(2) + "K";
-        }else if (length < 9){
+        }else if (quantity < 1e8){
             return (quantity/1e6).toFixed(2) + "M";
-        }else if (length < 12){
+        }else if (quantity < 1e11){
             return (quantity/1e9).toFixed(2) + "B";
-        }else if (length < 15){
+        }else if (quantity < 1e14){
             return (quantity/1e12).toFixed(2) + "T";
         }else{
             return (quantity/1e15).toFixed(2) + "Q";
@@ -105,7 +105,7 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
                 node.state = "collapsed";
             }
             recipe.materials.forEach((material: Material) => {
-                const childTree = getTree(material.typeID, material.quantity * multiplier, false, depth + 1);
+                const childTree = getTree(material.typeID, material.quantity * multiplier / recipe.products[0].quantity, false, depth + 1);
                 node.children.push(childTree);
             });
         }
@@ -203,10 +203,31 @@ export function generateConnections(tree: MaterialTree, edges: Edge[] = []): Edg
 
     if (tree.state === "expanded") {
         for (const child of tree.children) {
-            edges.push({ id: `e${buttonId}-${child.id}`, source: buttonId, target: child.id.toString() });
+            edges.push({ id: `e${buttonId}-${child.id}`, source: buttonId, target: child.id.toString(), type: "step" });
             generateConnections(child, edges);
         }
     }
 
     return edges;
+}
+
+interface BaseMaterials {
+    [typeID: string]: number;
+}
+
+export function getBaseMaterials(tree: MaterialTree, collapsed: boolean = false): BaseMaterials {
+    const materials: BaseMaterials = {};
+
+    function traverse(node: MaterialTree) {
+        if (collapsed && node.state === "collapsed" || node.children.length === 0) {
+            const key = node.typeID.toString();
+            materials[key] = (materials[key] || 0) + node.quantity;
+            return;
+        }
+
+        node.children.forEach(traverse);
+    }
+
+    traverse(tree);
+    return materials;
 }

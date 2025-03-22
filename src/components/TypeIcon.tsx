@@ -3,17 +3,20 @@ import {useTouch} from "./ViewportContext.tsx";
 
 interface Props {
     typeID?: number;
+    size?: number;
 }
 
-const TypeIcon = ({ typeID = 0 }: Props) => {
+const TypeIcon = ({ typeID = 0, size = 64 }: Props) => {
     const typeIconURL: string = `https://images.evetech.net/types/${typeID}/icon?size=64`;
     const { isTouch } = useTouch()
     return (
-        <div className="size-[64px]">
+        <div>
             <img src={typeIconURL}
                  className="hover:cursor-pointer"
                  alt="Type Icon"
                  draggable="false"
+                 width={`${size}`}
+                 height={`${size}`}
                  onError={(e) => (e.currentTarget.src = fallback)}
                  {...isTouch ? (
                      {onDoubleClick: () => {window.open(`https://everef.net/types/${typeID}`, "_blank")}}
