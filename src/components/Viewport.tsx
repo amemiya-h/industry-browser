@@ -15,6 +15,10 @@ import {
     getTree,
     toggleNode, generateDisplayNodes, generateConnections, updateQuantities,
 } from "./industrylib.ts";
+import caretDown from "../assets/graphics/caret_down_16px.png"
+import caretRight from "../assets/graphics/caret_right_16px.png"
+import checked from "../assets/graphics/check_true.png"
+import unchecked from "../assets/graphics/check_false.png"
 
 interface Item {
     name: string;
@@ -38,6 +42,7 @@ const Viewport = () => {
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState<Item[]>([]);
     const [activeTree, setActiveTree] = useState<MaterialTree | null>(null);
+    const [showToggles, setShowToggles] = useState(false);
 
     const { activeRoot, setActiveRoot } = useActiveRoot();
     const { signalData, setSignalData } = useSuppressSignalContext();
@@ -128,27 +133,9 @@ const Viewport = () => {
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
             <Canvas nodes={nodes} edges={edges} />
 
-            <div className="absolute z-20 top-[1em] left-[1em]">
+            <div className="absolute z-20 top-[1em] left-[1em] flex flex-col items-center">
                 <SearchBar setQuery={setQuery} setResult={setActiveRoot} suggestions={suggestions} />
-                <div className="mt-[1em] p-[0.5em] flex flex-col gap-2 bg-window-light border border-window-border text-sm">
-                    <span>Default behaviour</span>
-                    <hr className="h-px bg-dim border-0"/>
-                    {toggleLabels.map((label, index) => (
-                        <label key={index} className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                checked={toggles[index]}
-                                onChange={() => handleToggle(index)}
-                                className="w-4 h-4"
-                            />
-                            <span>{label}</span>
-                        </label>
-                    ))}
-                </div>
-            </div>
-
-            <div className="absolute z-20 top-[1em] left-[15em]">
-                <div className="flex gap-2">
+                <div className="flex justify-evenly my-[0.5em] self-stretch">
                     <div className="flex flex-col items-center">
                         <span className="text-sm">Runs</span>
                         <input
@@ -170,6 +157,32 @@ const Viewport = () => {
                             className="w-[4em] outline-0 text-dim bg-window-dark/80 focus:bg-window-light border border-window-border px-2 py-1 "
                         />
                     </div>
+                </div>
+                <div className="my-[0.5em] p-[0.5em] flex flex-col gap-2 bg-window-light border border-window-border text-sm transition-all self-stretch">
+                    <label className="flex flex-row items-center hover:cursor-pointer">
+                        <button onClick={()=> setShowToggles(!showToggles)}/>
+                        <img src={showToggles ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
+                        <span>Default behaviour</span>
+                    </label>
+                    {showToggles && (
+                        <>
+                            <hr className="h-px bg-dim border-0"/>
+                            {toggleLabels.map((label, index) => (
+                                <label key={index} className="flex items-center gap-2 hover:cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={toggles[index]}
+                                        onChange={() => handleToggle(index)}
+                                        className={`sr-only peer`}
+                                    />
+                                    <img src={checked} alt={"checked"} width={"16px"} height={"16px"} className={`hidden hover:cursor-pointer bg-window-dark border border-window-border peer-checked:block`}/>
+                                    <img src={unchecked} alt={"unchecked"} width={"16px"} height={"16px"} className={`hover:cursor-pointer bg-window-dark border border-window-border peer-checked:hidden`}/>
+                                    <span>{label}</span>
+                                </label>
+                            ))}
+                        </>
+                    )}
+
                 </div>
             </div>
 
