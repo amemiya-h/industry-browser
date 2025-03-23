@@ -1,6 +1,7 @@
 # Industry Browser
 
-A tool to visualize EVE Online's comprehensive industry simulation. 
+A tool to visualize EVE Online's extensive industry. 
+
 Available on https://amemiya-h.github.io/industry-browser/
 
 
