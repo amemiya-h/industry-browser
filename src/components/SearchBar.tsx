@@ -91,7 +91,7 @@ const SearchBar = ({ setQuery, setResult, suggestions = [] }: Props) => {
                 className="p-[0.2em] z-20 border border-window-border outline-0 text-regular text-dim bg-window-dark/80 focus:bg-window-light"
             />
             {focused && suggestions.length > 0 && (
-                <div className="bg-window-light/80 max-h-40 overflow-y-auto">
+                <div className="bg-window-light/80 max-h-40 overflow-y-auto absolute">
                     {suggestions.map((item, index) => (
                         <div
                             key={item.id}

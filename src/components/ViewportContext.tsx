@@ -36,12 +36,22 @@ interface TypeToDesc {
     [key: string]: Desc;
 }
 
+interface SettingsContext {
+    runs: number;
+    setRuns: (value: number) => void;
+    materialEfficiency: number;
+    setMaterialEfficiency: (value: number) => void;
+    toggles: boolean[];
+    setToggles: (value: boolean[]) => void;
+}
+
 const typeToDesc = typeToDescData as TypeToDesc;
 
 const ActiveRootContext = createContext<ActiveRootContext | null>(null);
 const SuppressSignalContext = createContext<SuppressSignalContext | null>(null);
 const DescDataContext = createContext<DescDataContext | null>(null);
 const TouchContext = createContext<TouchContext | null>(null);
+const SettingsContext = createContext<SettingsContext | null>(null);
 
 const ActiveRootProvider = ({ children } : { children: React.ReactNode }) => {
     const [activeRoot, setActiveRoot] = useState<Item | null>(null);
@@ -89,13 +99,27 @@ const TouchProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+const SettingsProvider = ({ children }: { children: React.ReactNode }) => {
+    const [runs, setRuns] = useState(1);
+    const [materialEfficiency, setMaterialEfficiency] = useState(0);
+    const [toggles, setToggles] = useState([false, true, true, true, true]);
+
+    return (
+        <SettingsContext.Provider value={{ runs, setRuns, materialEfficiency, setMaterialEfficiency, toggles, setToggles }}>
+            {children}
+        </SettingsContext.Provider>
+    );
+};
+
 export const ViewportProvider = ({ children }: { children: React.ReactNode }) => {
     return (
         <ActiveRootProvider>
             <SuppressSignalProvider>
                 <DescDataProvider>
                     <TouchProvider>
-                        {children}
+                        <SettingsProvider>
+                            {children}
+                        </SettingsProvider>
                     </TouchProvider>
                 </DescDataProvider>
             </SuppressSignalProvider>
@@ -124,5 +148,11 @@ export const useDescData = () => {
 export const useTouch = () => {
     const context = useContext(TouchContext);
     if (!context) throw new Error("useTouch must be used within a ViewportProvider");
+    return context;
+}
+
+export const useSettings = () => {
+    const context = useContext(SettingsContext);
+    if (!context) throw new Error("useSettings must be used within a ViewportProvider");
     return context;
 }

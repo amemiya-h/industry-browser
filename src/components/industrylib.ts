@@ -83,7 +83,7 @@ function getUniqueId(isRoot: boolean = true): number {
     return ++currentId;
 }
 
-export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean = true, depth: number = 1): MaterialTree {
+export function getTree(typeID: number, multiplier: number = 1, materialEfficiency:number, toggles:boolean[], isRoot: boolean = true, depth: number = 1): MaterialTree {
     const node: MaterialTree = {
         id: getUniqueId(isRoot),
         typeID,
@@ -94,18 +94,31 @@ export function getTree(typeID: number, multiplier: number = 1, isRoot: boolean 
         children: []
     };
 
-
     const typeIDStr = typeID.toString();
     if (Object.prototype.hasOwnProperty.call(schemesLookup, typeIDStr)) {
         const schemeID = schemesLookup[typeIDStr].toString();
         if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
             const recipe: Scheme = schemes[schemeID];
             node.productionType = recipe.type as "manufacturing" | "invention" | "reaction" | "pi"
-            if (node.productionType != "manufacturing" || ([4247, 4246, 4051, 4312].includes(node.typeID))) {
+            if (toggles[0] && node.productionType === "manufacturing") {
                 node.state = "collapsed";
             }
+            if (toggles[1] && node.productionType === "reaction") {
+                node.state = "collapsed";
+            }
+            if (toggles[2] && node.productionType === "pi") {
+                node.state = "collapsed";
+            }
+            if (toggles[3] && [4247, 4246, 4051, 4312].includes(node.typeID)) {
+                node.state = "collapsed";
+            }
+            if (toggles[4] && node.depth > 1) {
+                node.state = "collapsed";
+            }
+
+
             recipe.materials.forEach((material: Material) => {
-                const childTree = getTree(material.typeID, material.quantity * multiplier / recipe.products[0].quantity, false, depth + 1);
+                const childTree = getTree(material.typeID, material.quantity === 1 ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity) : Math.ceil(material.quantity * (1 - materialEfficiency) * Math.ceil(multiplier / recipe.products[0].quantity)), materialEfficiency, toggles, false, depth + 1);
                 node.children.push(childTree);
             });
         }
