@@ -4,21 +4,11 @@ import * as fuzzysort from "fuzzysort";
 
 import Canvas from "./Canvas.tsx";
 import Sidebar from "./Sidebar.tsx";
-import NAME_TO_TYPE from "../assets/data/type_lookup.json";
 import SearchBar from "./SearchBar.tsx";
-import {
-    useActiveRoot,
-    useSuppressSignalContext,
-    useSettings
-} from "./ViewportContext.tsx";
-import {
-    getTree,
-    toggleNode, generateDisplayNodes, generateConnections, updateQuantities,
-} from "./industrylib.ts";
-import caretDown from "../assets/graphics/caret_down_16px.png"
-import caretRight from "../assets/graphics/caret_right_16px.png"
-import checked from "../assets/graphics/check_true.png"
-import unchecked from "../assets/graphics/check_false.png"
+import { useActiveRoot, useSuppressSignalContext } from "./ViewportContext.tsx";
+import { getTree, toggleNode, generateDisplayNodes, generateConnections, updateQuantities } from "./industrylib.ts";
+import { useSettings } from "./SettingsContext.tsx";
+import { types } from "./industrylib.ts";
 
 interface Item {
     name: string;
@@ -35,52 +25,46 @@ interface MaterialTree {
     children: MaterialTree[];
 }
 
-const items = Object.entries(NAME_TO_TYPE).map(([name, id]) => ({ name, id }));
-
 const Viewport = () => {
+    const { activeRoot, setActiveRoot } = useActiveRoot();
+    const { signalData, setSignalData } = useSuppressSignalContext();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const { runs, setRuns, materialEfficiency, materialEfficiencyMap, toggles } = useSettings();
+
     const [collapsed, setCollapsed] = useState(true);
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState<Item[]>([]);
     const [activeTree, setActiveTree] = useState<MaterialTree | null>(null);
-    const [showToggles, setShowToggles] = useState(false);
-
-    const { activeRoot, setActiveRoot } = useActiveRoot();
-    const { signalData, setSignalData } = useSuppressSignalContext();
-    const [searchParams, setSearchParams] = useSearchParams(); // Initialize search params
-    const { runs, setRuns, materialEfficiency, setMaterialEfficiency, toggles, setToggles } = useSettings();
-
-    const toggleLabels = ["Suppress manufacturing", "Suppress reactions", "Suppress PI", "Suppress fuel blocks", "Show only first row"]; // Labels for checkboxes
+    const [toggleState, setToggleState] = useState<boolean[]>(toggles);
 
     useEffect(() => {
         // Sync activeTree with URL query parameter
         const rootId = searchParams.get("rootId");
         if (rootId) {
-            const root = items.find((item) => item.id === parseInt(rootId, 10));
+            const root = types.find((item) => item.id === parseInt(rootId, 10));
             if (root) setActiveRoot(root);
         }
     }, [searchParams, setActiveRoot]);
 
     useEffect(() => {
         if (activeRoot) {
-            setActiveTree(getTree(activeRoot.id, runs, materialEfficiency / 100, toggles));
+            setActiveTree(getTree(activeRoot.id, runs, materialEfficiency, toggles));
             setSearchParams({ rootId: activeRoot.id.toString() }); // Update URL when activeRoot changes
         }
     }, [activeRoot, setSearchParams]);
 
-
     useEffect(() => {
         if (activeTree) {
             // Only update quantities on the existing tree structure
-            updateQuantities(activeTree, runs, materialEfficiency / 100);
+            updateQuantities(activeTree, runs, materialEfficiency);
             // Force a re-render by setting a new reference if necessary
             setActiveTree({ ...activeTree });
         }
-    }, [runs, materialEfficiency]);
-
+    }, [runs, materialEfficiencyMap]);
 
     useEffect(() => {
         if (query) {
-            const partialMatches = fuzzysort.go(query, items, { key: "name", threshold: 0.75 });
+            const partialMatches = fuzzysort.go(query, types, { key: "name", threshold: 0.75 });
             setSuggestions(partialMatches.map((m) => m["obj"]));
         } else {
             setSuggestions([]);
@@ -89,29 +73,45 @@ const Viewport = () => {
 
     useEffect(() => {
         if (activeTree && signalData) {
-            console.log(signalData);
             setActiveTree(toggleNode(activeTree, signalData));
         }
         setSignalData(null);
     }, [signalData, setSignalData, activeTree]);
 
-    const toggleProductionType = (type: "manufacturing" | "reaction" | "pi" | "specific" | "firstRow") => {
+    const toggleProductionType = (type: "manufacturing" | "reaction" | "pi" | "fuelblock" | "ram" | "firstRow") => {
         if (!activeTree) return;
+
+        const typeIndex = {
+            manufacturing: 0,
+            reaction: 1,
+            pi: 2,
+            fuelblock: 3,
+            ram: 4,
+            firstRow: 5,
+        }[type];
+
+        const newToggleState = [...toggleState];
+        newToggleState[typeIndex] = !toggleState[typeIndex];
 
         function traverseAndToggle(node: MaterialTree): MaterialTree {
             const updatedChildren = node.children.map(traverseAndToggle);
 
             if (
-                (type === "specific" && [4247, 4246, 4051, 4312].includes(node.typeID)) ||
+                (type === "fuelblock" && [4247, 4246, 4051, 4312].includes(node.typeID)) ||
+                (type === "ram" && [11474, 11475, 11476, 11477, 11478, 11479, 11480, 11481, 11482, 11483, 11484, 11485, 11486].includes(node.typeID)) ||
                 (type === "firstRow" && node.depth === 2) ||
-                (type !== "specific" && type !== "firstRow" && node.productionType === type)
+                (type !== "fuelblock" && type !== "ram" && type !== "firstRow" && node.productionType === type)
             ) {
-                return toggleNode({ ...node, children: updatedChildren }, node.id);
+                return toggleNode(
+                    { ...node, children: updatedChildren, state: newToggleState[typeIndex] ? "collapsed" : "expanded" },
+                    node.id
+                );
             }
 
             return { ...node, children: updatedChildren };
         }
 
+        setToggleState(newToggleState);
         setActiveTree(traverseAndToggle(activeTree));
     };
 
@@ -123,21 +123,15 @@ const Viewport = () => {
         return activeTree ? generateConnections(activeTree) : [];
     }, [activeTree]);
 
-    const handleToggle = (index: number) => {
-        const updatedToggles = [...toggles];
-        updatedToggles[index] = !updatedToggles[index];
-        setToggles(updatedToggles);
-    };
-
     return (
         <div className="relative w-full h-full flex-grow-1 flex flex-row">
             <Canvas nodes={nodes} edges={edges} />
 
             <div className="absolute z-20 top-[1em] left-[1em] flex flex-col items-center">
                 <SearchBar setQuery={setQuery} setResult={setActiveRoot} suggestions={suggestions} />
-                <div className="flex justify-evenly my-[0.5em] self-stretch">
+                <div className="flex justify-start my-[0.5em] self-stretch">
                     <div className="flex flex-col items-center">
-                        <span className="text-sm">Runs</span>
+                        <span className="text-sm">JOB RUNS</span>
                         <input
                             type="number"
                             min={1}
@@ -146,49 +140,12 @@ const Viewport = () => {
                             className="w-[4em] outline-0 text-dim bg-window-dark/80 focus:bg-window-light border border-window-border px-2 py-1 "
                         />
                     </div>
-                    <div className="flex flex-col items-center">
-                        <span className="text-sm">ME</span>
-                        <input
-                            type="number"
-                            min={0}
-                            max={10}
-                            value={materialEfficiency}
-                            onChange={(e) => setMaterialEfficiency(Number(e.target.value))}
-                            className="w-[4em] outline-0 text-dim bg-window-dark/80 focus:bg-window-light border border-window-border px-2 py-1 "
-                        />
-                    </div>
-                </div>
-                <div className="my-[0.5em] p-[0.5em] flex flex-col gap-2 bg-window-light border border-window-border text-sm transition-all self-stretch">
-                    <label className="flex flex-row items-center hover:cursor-pointer">
-                        <button onClick={()=> setShowToggles(!showToggles)}/>
-                        <img src={showToggles ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
-                        <span>Default behaviour</span>
-                    </label>
-                    {showToggles && (
-                        <>
-                            <hr className="h-px bg-dim border-0"/>
-                            {toggleLabels.map((label, index) => (
-                                <label key={index} className="flex items-center gap-2 hover:cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={toggles[index]}
-                                        onChange={() => handleToggle(index)}
-                                        className={`sr-only peer`}
-                                    />
-                                    <img src={checked} alt={"checked"} width={"16px"} height={"16px"} className={`hidden hover:cursor-pointer bg-window-dark border border-window-border peer-checked:block`}/>
-                                    <img src={unchecked} alt={"unchecked"} width={"16px"} height={"16px"} className={`hover:cursor-pointer bg-window-dark border border-window-border peer-checked:hidden`}/>
-                                    <span>{label}</span>
-                                </label>
-                            ))}
-                        </>
-                    )}
-
                 </div>
             </div>
 
             <div className="absolute z-20 bottom-[2em] left-[2em] flex flex-col gap-2">
-                <span className="text-sm text-dim">Show/Hide Production</span>
-                <hr className="h-px bg-dim border-0"/>
+                <span className="text-sm text-dim">Show/Hide Nodes</span>
+                <hr className="h-px bg-dim border-0" />
                 <div className="flex flex-row items-center gap-2">
                     <button
                         onClick={() => toggleProductionType("manufacturing")}
@@ -208,14 +165,19 @@ const Viewport = () => {
                     >
                         PI
                     </button>
-
                 </div>
                 <div className="flex flex-row items-center gap-2">
                     <button
-                        onClick={() => toggleProductionType("specific")}
+                        onClick={() => toggleProductionType("fuelblock")}
                         className="text-sm text-highlight w-[8em] px-[1em] py-[0.5em] border border-secondary bg-secondary/40 hover:cursor-pointer hover:bg-secondary/60"
                     >
                         Fuel Blocks
+                    </button>
+                    <button
+                        onClick={() => toggleProductionType("ram")}
+                        className="text-sm text-highlight w-[8em] px-[1em] py-[0.5em] border border-secondary bg-secondary/40 hover:cursor-pointer hover:bg-secondary/60"
+                    >
+                        R.A.M.
                     </button>
                     <button
                         onClick={() => toggleProductionType("firstRow")}
@@ -226,10 +188,10 @@ const Viewport = () => {
                 </div>
             </div>
 
-            <Sidebar 
-                collapsed={collapsed} 
-                setCollapsed={setCollapsed} 
-                typeID={activeRoot?.id} 
+            <Sidebar
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+                typeID={activeRoot?.id}
                 activeTree={activeTree}
             />
         </div>

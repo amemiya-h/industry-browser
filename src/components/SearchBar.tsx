@@ -88,10 +88,10 @@ const SearchBar = ({ setQuery, setResult, suggestions = [] }: Props) => {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onKeyDown={handleKeyDown}
-                className="p-[0.2em] z-20 border border-window-border outline-0 text-regular text-dim bg-window-dark/80 focus:bg-window-light self-stretch"
+                className="p-[0.2em] z-20 border border-window-border outline-0 text-regular text-dim bg-window-dark/80 focus:bg-window-light self-stretch w-[15em]"
             />
             {focused && suggestions.length > 0 && (
-                <div className="bg-window-light/80 max-h-40 overflow-y-auto absolute w-full">
+                <div className="bg-window-light/80 max-h-35 overflow-y-auto absolute w-[15em]">
                     {suggestions.map((item, index) => (
                         <div
                             key={item.id}

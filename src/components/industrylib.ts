@@ -1,6 +1,9 @@
 import schemesLookupData from "../assets/data/schemes_lookup.json";
 import schemesData from "../assets/data/schemes.json";
+import typeLookup from "../assets/data/type_lookup.json";
+
 import {hierarchy, tree} from "d3-hierarchy";
+
 
 interface Material {
     quantity: number;
@@ -54,8 +57,9 @@ interface Edge {
     type?: string;
 }
 
-const schemesLookup = schemesLookupData as SchemesLookup;
-const schemes = schemesData as Schemes;
+export const schemesLookup = schemesLookupData as SchemesLookup;
+export const schemes = schemesData as Schemes;
+export const types = Object.entries(typeLookup).map(([name, id]) => ({ name, id }));
 
 export function quantityToString(quantity: number, format: "long"|"short") {
     if (format === "long") {
@@ -83,7 +87,14 @@ function getUniqueId(isRoot: boolean = true): number {
     return ++currentId;
 }
 
-export function getTree(typeID: number, multiplier: number = 1, materialEfficiency:number, toggles:boolean[], isRoot: boolean = true, depth: number = 1): MaterialTree {
+export function getTree(
+    typeID: number,
+    multiplier: number = 1,
+    getMaterialEfficiency: (typeID: number) => number,
+    toggles: boolean[],
+    isRoot: boolean = true,
+    depth: number = 1
+): MaterialTree {
     const node: MaterialTree = {
         id: getUniqueId(isRoot),
         typeID,
@@ -99,25 +110,35 @@ export function getTree(typeID: number, multiplier: number = 1, materialEfficien
         const schemeID = schemesLookup[typeIDStr].toString();
         if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
             const recipe: Scheme = schemes[schemeID];
-            node.productionType = recipe.type as "manufacturing" | "invention" | "reaction" | "pi"
-            if (toggles[0] && node.productionType === "manufacturing") {
+            node.productionType = recipe.type as "manufacturing" | "invention" | "reaction" | "pi";
+
+            // Apply toggles to handle node state
+            if (!toggles[0] && node.productionType === "manufacturing") {
                 node.state = "collapsed";
             }
-            if (toggles[1] && node.productionType === "reaction") {
+            if (!toggles[1] && node.productionType === "reaction") {
                 node.state = "collapsed";
             }
-            if (toggles[2] && node.productionType === "pi") {
+            if (!toggles[2] && node.productionType === "pi") {
                 node.state = "collapsed";
             }
             if (toggles[3] && [4247, 4246, 4051, 4312].includes(node.typeID)) {
                 node.state = "collapsed";
             }
-            if (toggles[4] && node.depth > 1) {
+            if (toggles[4] && [11474, 11475, 11476, 11477, 11478, 11479, 11480, 11481, 11482, 11483, 11484, 11485, 11486].includes(node.typeID)) {
+                node.state = "collapsed";
+            }
+            if (toggles[5] && node.depth > 1) {
                 node.state = "collapsed";
             }
 
             recipe.materials.forEach((material: Material) => {
-                const childTree = getTree(material.typeID, (material.quantity === 1 || recipe.type === "pi") ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity) : Math.ceil(material.quantity * (1 - materialEfficiency) * Math.ceil(multiplier / recipe.products[0].quantity)), materialEfficiency, toggles, false, depth + 1);
+                const efficiency = getMaterialEfficiency(material.typeID);
+                const materialQuantity = (material.quantity === 1 || recipe.type === "pi")
+                    ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity)
+                    : Math.ceil(material.quantity * (1 - efficiency) * Math.ceil(multiplier / recipe.products[0].quantity));
+
+                const childTree = getTree(material.typeID, materialQuantity, getMaterialEfficiency, toggles, false, depth + 1);
                 node.children.push(childTree);
             });
         }
@@ -125,7 +146,12 @@ export function getTree(typeID: number, multiplier: number = 1, materialEfficien
     return node;
 }
 
-export function updateQuantities(tree: MaterialTree, runs: number, efficiency: number): MaterialTree {
+
+export function updateQuantities(
+    tree: MaterialTree,
+    runs: number,
+    getMaterialEfficiency: (typeID: number) => number
+): MaterialTree {
     // Update the current node's quantity
     tree.quantity = runs;
 
@@ -136,15 +162,18 @@ export function updateQuantities(tree: MaterialTree, runs: number, efficiency: n
             const schemeID = schemesLookup[typeIDStr].toString();
             if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
                 const recipe: Scheme = schemes[schemeID];
+                const efficiency = getMaterialEfficiency(tree.typeID);
                 const newRuns = (child.quantity === 1 || recipe.type === "pi")
                     ? recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * Math.ceil(runs / recipe.products[0].quantity)
                     : Math.ceil(recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * (1 - efficiency) * Math.ceil(runs / recipe.products[0].quantity));
-                updateQuantities(child, newRuns, efficiency);
+
+                updateQuantities(child, newRuns, getMaterialEfficiency);
             }
         }
     });
     return tree;
 }
+
 
 
 export function toggleNode(tree: MaterialTree, targetId: number): MaterialTree {

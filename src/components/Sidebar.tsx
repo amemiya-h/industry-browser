@@ -2,11 +2,10 @@ import info from "../assets/graphics/info.png";
 import chevron_left from "../assets/graphics/chevron_left_double_16px.png";
 import chevron_right from "../assets/graphics/chevron_right_double_16px.png";
 import TypeIcon from "./TypeIcon.tsx";
-import {useDescData} from "./ViewportContext.tsx";
+import {useDescData} from "./SettingsContext.tsx";
 import { getBaseMaterials, quantityToString } from "./industrylib.ts";
 import { useState } from "react";
-import caretDown from "../assets/graphics/caret_down_16px.png";
-import caretRight from "../assets/graphics/caret_right_16px.png";
+import Submenu from "./Submenu.tsx";
 
 interface BaseMaterials {
     [typeID: string]: number;
@@ -58,9 +57,6 @@ const copyMaterialsToClipboard = (materials: BaseMaterials, typeToDesc: any, set
 const SidebarContent = (collapsed: boolean, typeID: number, activeTree: MaterialTree | null, typeToDesc: any) => {
     const [copiedTree, setCopiedTree] = useState(false);
     const [copiedFull, setCopiedFull] = useState(false);
-    const [showMaterialTree, setShowMaterialTree] = useState(true);
-    const [showMaterialFull, setShowMaterialFull] = useState(true);
-    const [showDescription, setShowDescription] = useState(true);
 
     const typeName : string = (typeID ? typeToDesc[typeID.toString()].name : "");
     const typeDesc : string = (typeID ? typeToDesc[typeID.toString()].description : "");
@@ -86,60 +82,25 @@ const SidebarContent = (collapsed: boolean, typeID: number, activeTree: Material
                                 <p className={"text-regular text-dim mx-[1em]"}>{typeCategory}</p>
                             </div>
                         </div>
-
-                        <p className="text-regular p-[0.5em] bg-window-light-active self-stretch flex items-center justify-between">
-                            <label className="flex flex-row items-center hover:cursor-pointer">
-                                <button onClick={()=> setShowMaterialTree(!showMaterialTree)}/>
-                                <img src={showMaterialTree ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
-                                Input materials (Tree)
-                            </label>
-                            <button
-                                onClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, true), typeToDesc, setCopiedTree)}
-                                className="text-regular text-primary/40 hover:underline hover:text-primary hover:cursor-pointer"
-                            >
-                                {copiedTree ? "Copied!" : "Copy"}
-                            </button>
-                        </p>
-                        {showMaterialTree &&
+                        <Submenu label={"Input materials (Tree)"} buttonLabel={copiedTree ? "Copied!" : "Copy"} onButtonClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, true), typeToDesc, setCopiedTree)}>
                             <div className="self-stretch mx-[1em]">
                                 <MaterialsList
                                     materials={getBaseMaterials(activeTree, true)}
                                     typeToDesc={typeToDesc}
                                 />
                             </div>
-                        }
-
-                        <p className="text-regular p-[0.5em] bg-window-light-active self-stretch flex items-center justify-between">
-                            <label className="flex flex-row items-center hover:cursor-pointer">
-                                <button onClick={()=> setShowMaterialFull(!showMaterialFull)}/>
-                                <img src={showMaterialFull ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
-                                Input materials (Full)
-                            </label>
-                            <button
-                                onClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, false), typeToDesc, setCopiedFull)}
-                                className="text-regular text-primary/40 hover:underline hover:text-primary hover:cursor-pointer"
-                            >
-                                {copiedFull ? "Copied!" : "Copy"}
-                            </button>
-                        </p>
-                        {showMaterialFull &&
-                        <div className="self-stretch mx-[1em]">
-                            <MaterialsList 
-                                materials={getBaseMaterials(activeTree, false)} 
-                                typeToDesc={typeToDesc}
-                            />
-                        </div>
-                        }
-                        <p className="text-regular p-[0.5em] bg-window-light-active self-stretch">
-                            <label className="flex flex-row items-center hover:cursor-pointer">
-                                <button onClick={()=> setShowDescription(!showDescription)}/>
-                                <img src={showDescription ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
-                                Description
-                            </label>
-                        </p>
-                        {showDescription &&
-                        <p className={`text-regular text-justify m-[1em] self-stretch ${(typeDesc ? "" : "text-dim")}`} dangerouslySetInnerHTML={typeDesc ? {__html: typeDesc} : {__html: "This item has no description."}}/>
-                        }
+                        </Submenu>
+                        <Submenu label={"Input materials (Full)"} buttonLabel={copiedFull ? "Copied!" : "Copy"} onButtonClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, false), typeToDesc, setCopiedFull)}>
+                            <div className="self-stretch mx-[1em]">
+                                <MaterialsList
+                                    materials={getBaseMaterials(activeTree, false)}
+                                    typeToDesc={typeToDesc}
+                                />
+                            </div>
+                        </Submenu>
+                        <Submenu label={"Description"}>
+                            <p className={`text-regular text-justify m-[1em] self-stretch ${(typeDesc ? "" : "text-dim")}`} dangerouslySetInnerHTML={typeDesc ? {__html: typeDesc} : {__html: "This item has no description."}}/>
+                        </Submenu>
 
                         <div className={"h-[2em]"}/>
                     </div>

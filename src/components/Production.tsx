@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Handle, Node, NodeProps, Position} from '@xyflow/react';
 import {quantityToString} from "./industrylib.ts";
 import TypeIcon from './TypeIcon';
-import {useDescData} from "./ViewportContext.tsx";
+import {useDescData} from "./SettingsContext.tsx";
 
 type Production = Node<{ typeID: number, quantity: number}, 'production'>
 
