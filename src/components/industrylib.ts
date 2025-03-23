@@ -61,6 +61,18 @@ export const schemesLookup = schemesLookupData as SchemesLookup;
 export const schemes = schemesData as Schemes;
 export const types = Object.entries(typeLookup).map(([name, id]) => ({ name, id }));
 
+export function typeOfScheme(typeID: number): string {
+    const typeIDStr = typeID.toString();
+    if (Object.prototype.hasOwnProperty.call(schemesLookup, typeIDStr)) {
+        const schemeID = schemesLookup[typeIDStr].toString();
+        if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
+            const recipe: Scheme = schemes[schemeID];
+            return recipe.type;
+        }
+    }
+    return "";
+}
+
 export function quantityToString(quantity: number, format: "long"|"short") {
     if (format === "long") {
         return quantity.toLocaleString("en-US");
@@ -134,7 +146,7 @@ export function getTree(
 
             recipe.materials.forEach((material: Material) => {
                 const efficiency = getMaterialEfficiency(material.typeID);
-                const materialQuantity = (material.quantity === 1 || recipe.type === "pi")
+                const materialQuantity = (material.quantity === 1 || recipe.type != "manufacturing")
                     ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity)
                     : Math.ceil(material.quantity * (1 - efficiency) * Math.ceil(multiplier / recipe.products[0].quantity));
 
@@ -163,7 +175,7 @@ export function updateQuantities(
             if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
                 const recipe: Scheme = schemes[schemeID];
                 const efficiency = getMaterialEfficiency(tree.typeID);
-                const newRuns = (child.quantity === 1 || recipe.type === "pi")
+                const newRuns = (child.quantity === 1 || recipe.type != "manufacturing")
                     ? recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * Math.ceil(runs / recipe.products[0].quantity)
                     : Math.ceil(recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * (1 - efficiency) * Math.ceil(runs / recipe.products[0].quantity));
 

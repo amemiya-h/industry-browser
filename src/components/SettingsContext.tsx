@@ -89,7 +89,7 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
 
     const [toggles, setToggles] = useState<boolean[]>(() => {
         const savedToggles = localStorage.getItem("toggles");
-        return savedToggles ? JSON.parse(savedToggles) : [true, false, false, true, true, true];
+        return savedToggles ? JSON.parse(savedToggles) : [true, false, false, true, true, false];
     });
 
     useEffect(() => {

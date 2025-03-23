@@ -10,7 +10,7 @@ import minimize from "../assets/graphics/minimize_16px.png"
 import {useSettings, useDescData} from "./SettingsContext.tsx";
 import Submenu from "./Submenu.tsx";
 import SearchBar from "./SearchBar";
-import {types} from "./industrylib.ts";
+import {types, typeOfScheme} from "./industrylib.ts";
 
 
 interface OverlayProps {
@@ -114,7 +114,7 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const availableItems = types.filter(item => materialEfficiencyMap[item.id] === undefined);
+        const availableItems = types.filter(item => ((materialEfficiencyMap[item.id] === undefined) && (typeOfScheme(item.id) === "manufacturing")));
         if (query) {
             const partialMatches = fuzzysort.go(query, availableItems, { key: "name", threshold: 0.75 });
             setSuggestions(partialMatches.map((m) => m["obj"]));
