@@ -5,6 +5,8 @@ import TypeIcon from "./TypeIcon.tsx";
 import {useDescData} from "./ViewportContext.tsx";
 import { getBaseMaterials, quantityToString } from "./industrylib.ts";
 import { useState } from "react";
+import caretDown from "../assets/graphics/caret_down_16px.png";
+import caretRight from "../assets/graphics/caret_right_16px.png";
 
 interface BaseMaterials {
     [typeID: string]: number;
@@ -49,13 +51,16 @@ const copyMaterialsToClipboard = (materials: BaseMaterials, typeToDesc: any, set
         .join("\n");
     navigator.clipboard.writeText(materialList).then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+        setTimeout(() => setCopied(false), 1000);
     });
 };
 
 const SidebarContent = (collapsed: boolean, typeID: number, activeTree: MaterialTree | null, typeToDesc: any) => {
     const [copiedTree, setCopiedTree] = useState(false);
     const [copiedFull, setCopiedFull] = useState(false);
+    const [showMaterialTree, setShowMaterialTree] = useState(true);
+    const [showMaterialFull, setShowMaterialFull] = useState(true);
+    const [showDescription, setShowDescription] = useState(true);
 
     const typeName : string = (typeID ? typeToDesc[typeID.toString()].name : "");
     const typeDesc : string = (typeID ? typeToDesc[typeID.toString()].description : "");
@@ -72,8 +77,8 @@ const SidebarContent = (collapsed: boolean, typeID: number, activeTree: Material
                     </p>
                 </div>
                 {typeID && activeTree ? (
-                    <div className="overflow-x-hidden overflow-y-auto mx-[1em] flex flex-col items-start justify-start">
-                        <div className="h-[90px] flex flex-row items-start justify-center">
+                    <div className="overflow-x-hidden overflow-y-auto mx-[1em] flex flex-col items-start justify-start gap-[0.5em]">
+                        <div className="h-[90px] flex flex-row items-center justify-start self-stretch">
                             <TypeIcon typeID={typeID}/>
                             <div className={"flex flex-col items-start justify-center"}>
                                 <p className={"text-regular mx-[1em]"}>{typeName}</p>
@@ -81,38 +86,60 @@ const SidebarContent = (collapsed: boolean, typeID: number, activeTree: Material
                                 <p className={"text-regular text-dim mx-[1em]"}>{typeCategory}</p>
                             </div>
                         </div>
+
                         <p className="text-regular p-[0.5em] bg-window-light-active self-stretch flex items-center justify-between">
-                            Input materials (Tree)
+                            <label className="flex flex-row items-center hover:cursor-pointer">
+                                <button onClick={()=> setShowMaterialTree(!showMaterialTree)}/>
+                                <img src={showMaterialTree ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
+                                Input materials (Tree)
+                            </label>
                             <button
                                 onClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, true), typeToDesc, setCopiedTree)}
-                                className="text-regular text-primary/40 hover:underline hover:text-primary/60 hover:cursor-pointer"
+                                className="text-regular text-primary/40 hover:underline hover:text-primary hover:cursor-pointer"
                             >
                                 {copiedTree ? "Copied!" : "Copy"}
                             </button>
                         </p>
-                        <div className="m-[1em] self-stretch">
-                            <MaterialsList 
-                                materials={getBaseMaterials(activeTree, true)} 
-                                typeToDesc={typeToDesc}
-                            />
-                        </div>
+                        {showMaterialTree &&
+                            <div className="self-stretch">
+                                <MaterialsList
+                                    materials={getBaseMaterials(activeTree, true)}
+                                    typeToDesc={typeToDesc}
+                                />
+                            </div>
+                        }
+
                         <p className="text-regular p-[0.5em] bg-window-light-active self-stretch flex items-center justify-between">
-                            Input materials (Full)
+                            <label className="flex flex-row items-center hover:cursor-pointer">
+                                <button onClick={()=> setShowMaterialFull(!showMaterialFull)}/>
+                                <img src={showMaterialFull ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
+                                Input materials (Full)
+                            </label>
                             <button
                                 onClick={() => copyMaterialsToClipboard(getBaseMaterials(activeTree, false), typeToDesc, setCopiedFull)}
-                                className="text-regular text-primary/40 hover:underline hover:text-primary/60 hover:cursor-pointer"
+                                className="text-regular text-primary/40 hover:underline hover:text-primary hover:cursor-pointer"
                             >
                                 {copiedFull ? "Copied!" : "Copy"}
                             </button>
                         </p>
-                        <div className="m-[1em] self-stretch">
+                        {showMaterialFull &&
+                        <div className="self-stretch">
                             <MaterialsList 
                                 materials={getBaseMaterials(activeTree, false)} 
                                 typeToDesc={typeToDesc}
                             />
                         </div>
-                        <p className="text-regular p-[0.5em] bg-window-light-active self-stretch">Description</p>
+                        }
+                        <p className="text-regular p-[0.5em] bg-window-light-active self-stretch">
+                            <label className="flex flex-row items-center hover:cursor-pointer">
+                                <button onClick={()=> setShowDescription(!showDescription)}/>
+                                <img src={showDescription ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
+                                Description
+                            </label>
+                        </p>
+                        {showDescription &&
                         <p className={`text-regular text-justify m-[1em] self-stretch ${(typeDesc ? "" : "text-dim")}`} dangerouslySetInnerHTML={typeDesc ? {__html: typeDesc} : {__html: "This item has no description."}}/>
+                        }
 
                         <div className={"h-[2em]"}/>
                     </div>
