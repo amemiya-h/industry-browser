@@ -13,7 +13,7 @@ import {
 } from "./ViewportContext.tsx";
 import {
     getTree,
-    toggleNode, generateDisplayNodes, generateConnections,
+    toggleNode, generateDisplayNodes, generateConnections, updateQuantities,
 } from "./industrylib.ts";
 
 interface Item {
@@ -57,10 +57,21 @@ const Viewport = () => {
 
     useEffect(() => {
         if (activeRoot) {
-            setActiveTree(getTree(activeRoot.id, runs, materialEfficiency/100, toggles));
+            setActiveTree(getTree(activeRoot.id, runs, materialEfficiency / 100, toggles));
             setSearchParams({ rootId: activeRoot.id.toString() }); // Update URL when activeRoot changes
         }
-    }, [activeRoot, materialEfficiency, runs, setSearchParams]);
+    }, [activeRoot, setSearchParams]);
+
+
+    useEffect(() => {
+        if (activeTree) {
+            // Only update quantities on the existing tree structure
+            updateQuantities(activeTree, runs, materialEfficiency / 100);
+            // Force a re-render by setting a new reference if necessary
+            setActiveTree({ ...activeTree });
+        }
+    }, [runs, materialEfficiency]);
+
 
     useEffect(() => {
         if (query) {

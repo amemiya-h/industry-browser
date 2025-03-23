@@ -116,15 +116,36 @@ export function getTree(typeID: number, multiplier: number = 1, materialEfficien
                 node.state = "collapsed";
             }
 
-
             recipe.materials.forEach((material: Material) => {
-                const childTree = getTree(material.typeID, material.quantity === 1 ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity) : Math.ceil(material.quantity * (1 - materialEfficiency) * Math.ceil(multiplier / recipe.products[0].quantity)), materialEfficiency, toggles, false, depth + 1);
+                const childTree = getTree(material.typeID, (material.quantity === 1 || recipe.type === "pi") ? material.quantity * Math.ceil(multiplier / recipe.products[0].quantity) : Math.ceil(material.quantity * (1 - materialEfficiency) * Math.ceil(multiplier / recipe.products[0].quantity)), materialEfficiency, toggles, false, depth + 1);
                 node.children.push(childTree);
             });
         }
     }
     return node;
 }
+
+export function updateQuantities(tree: MaterialTree, runs: number, efficiency: number): MaterialTree {
+    // Update the current node's quantity
+    tree.quantity = runs;
+
+    // Recursively update children
+    tree.children.forEach(child => {
+        const typeIDStr = tree.typeID.toString();
+        if (Object.prototype.hasOwnProperty.call(schemesLookup, typeIDStr)) {
+            const schemeID = schemesLookup[typeIDStr].toString();
+            if (Object.prototype.hasOwnProperty.call(schemes, schemeID)) {
+                const recipe: Scheme = schemes[schemeID];
+                const newRuns = (child.quantity === 1 || recipe.type === "pi")
+                    ? recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * Math.ceil(runs / recipe.products[0].quantity)
+                    : Math.ceil(recipe.materials.filter(material => material.typeID === child.typeID)[0].quantity * (1 - efficiency) * Math.ceil(runs / recipe.products[0].quantity));
+                updateQuantities(child, newRuns, efficiency);
+            }
+        }
+    });
+    return tree;
+}
+
 
 export function toggleNode(tree: MaterialTree, targetId: number): MaterialTree {
     if (tree.id === targetId) {
