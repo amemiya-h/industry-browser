@@ -101,7 +101,7 @@ const SidebarContent = (collapsed: boolean, typeID: number, activeTree: Material
                             </button>
                         </p>
                         {showMaterialTree &&
-                            <div className="self-stretch">
+                            <div className="self-stretch mx-[1em]">
                                 <MaterialsList
                                     materials={getBaseMaterials(activeTree, true)}
                                     typeToDesc={typeToDesc}
@@ -123,7 +123,7 @@ const SidebarContent = (collapsed: boolean, typeID: number, activeTree: Material
                             </button>
                         </p>
                         {showMaterialFull &&
-                        <div className="self-stretch">
+                        <div className="self-stretch mx-[1em]">
                             <MaterialsList 
                                 materials={getBaseMaterials(activeTree, false)} 
                                 typeToDesc={typeToDesc}
