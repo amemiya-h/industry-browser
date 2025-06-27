@@ -1,0 +1,3123 @@
+{
+  "37146": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37147": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37148": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37149": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37150": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37151": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37152": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37153": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37154": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37155": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37156": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37157": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37158": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37159": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37160": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37161": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37162": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37163": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37164": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37165": {
+    "affectedCategoryID": [
+      8
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37166": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37167": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37168": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37169": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37170": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37171": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37172": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      485,
+      547,
+      883,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37173": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      485,
+      547,
+      883,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37174": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37175": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37178": {
+    "affectedCategoryID": [
+      7,
+      8,
+      18,
+      20,
+      22,
+      87
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37179": {
+    "affectedCategoryID": [
+      7,
+      8,
+      18,
+      20,
+      22,
+      87
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37180": {
+    "affectedCategoryID": [
+      6,
+      32
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "37181": {
+    "affectedCategoryID": [
+      6,
+      32
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43704": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      332,
+      334,
+      536,
+      716,
+      873,
+      913,
+      964,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43705": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      332,
+      334,
+      536,
+      716,
+      873,
+      913,
+      964,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43707": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43708": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43709": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43711": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43712": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43713": {
+    "affectedCategoryID": [
+      18,
+      87
+    ],
+    "affectedGroupID": [],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43714": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43715": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      31,
+      420
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43716": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43717": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43718": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43719": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43720": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43721": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43732": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43733": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43734": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      27,
+      513,
+      941
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43854": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43855": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43856": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43857": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      324,
+      541,
+      830,
+      831,
+      834,
+      893,
+      1283,
+      1305,
+      1527,
+      1534
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43858": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43859": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43860": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43861": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      358,
+      380,
+      540,
+      543,
+      832,
+      833,
+      894,
+      906,
+      963,
+      1202,
+      1972
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43862": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43863": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43864": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43865": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      898,
+      900,
+      902
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43866": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43867": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43868": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43869": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43870": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43871": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43872": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43873": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43874": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43875": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43876": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43877": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      536,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -24.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43919": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      26,
+      28,
+      419,
+      463,
+      1201
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43920": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "43921": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.4,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 1.0,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 2.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "45544": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 0.1,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 0.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "45546": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 0.1,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 0.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "45548": {
+    "affectedCategoryID": [
+      23,
+      39,
+      40,
+      65,
+      66
+    ],
+    "affectedGroupID": [
+      332,
+      334,
+      536,
+      716,
+      873,
+      913,
+      964,
+      1136,
+      4736
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 0.1,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 0.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "45640": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0.0,
+    "hiSecMultiplier": 0.1,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 0.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "45641": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0.0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": -20.0,
+    "hiSecMultiplier": 0.1,
+    "lowSecMultiplier": 1.9,
+    "nullSecMultiplier": 0.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "46484": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -20.0
+  },
+  "46485": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -24.0
+  },
+  "46486": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.0,
+    "refineryTimeBonus": 0
+  },
+  "46487": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.4,
+    "refineryTimeBonus": 0
+  },
+  "46488": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      974
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -20.0
+  },
+  "46489": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      974
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -24.0
+  },
+  "46490": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      974
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.0,
+    "refineryTimeBonus": 0
+  },
+  "46491": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      974
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.4,
+    "refineryTimeBonus": 0
+  },
+  "46492": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      712,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -20.0
+  },
+  "46493": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      712,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": -24.0
+  },
+  "46494": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      712,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.0,
+    "refineryTimeBonus": 0
+  },
+  "46495": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      712,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.4,
+    "refineryTimeBonus": 0
+  },
+  "46496": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429,
+      712,
+      974,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.0,
+    "refineryTimeBonus": -20.0
+  },
+  "46497": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      428,
+      429,
+      712,
+      974,
+      4096
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1.0,
+    "nullSecMultiplier": 1.1,
+    "refineryMaterialBonus": -2.4,
+    "refineryTimeBonus": -24.0
+  },
+  "47883": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47981": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47982": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47985": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      324,
+      358,
+      380,
+      540,
+      541,
+      543,
+      830,
+      831,
+      832,
+      833,
+      834,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      963,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1972
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47986": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47987": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47990": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47991": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "47992": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48008": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48011": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48012": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48022": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48023": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48024": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48025": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48026": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48027": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48028": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48029": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48030": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48031": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -4.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48037": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48038": {
+    "affectedCategoryID": [
+      7,
+      20,
+      22
+    ],
+    "affectedGroupID": [
+      12,
+      340,
+      448,
+      649
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48042": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      324,
+      358,
+      380,
+      540,
+      541,
+      543,
+      830,
+      831,
+      832,
+      833,
+      834,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      963,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1972
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48043": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48044": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48046": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      419,
+      420,
+      463,
+      485,
+      513,
+      547,
+      883,
+      941,
+      1201,
+      1538,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48047": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48053": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      324,
+      358,
+      380,
+      540,
+      541,
+      543,
+      830,
+      831,
+      832,
+      833,
+      834,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      963,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1972
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48054": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48056": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48061": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48062": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48063": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -3.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48064": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      324,
+      358,
+      380,
+      540,
+      541,
+      543,
+      830,
+      831,
+      832,
+      833,
+      834,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      963,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1972
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48065": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48066": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": 0.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48067": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      873
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -2.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48068": {
+    "affectedCategoryID": [],
+    "affectedGroupID": [
+      332,
+      334,
+      716,
+      913,
+      964
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -1.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48069": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -4.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  },
+  "48070": {
+    "affectedCategoryID": [
+      32
+    ],
+    "affectedGroupID": [
+      25,
+      26,
+      27,
+      28,
+      31,
+      324,
+      358,
+      380,
+      419,
+      420,
+      463,
+      485,
+      513,
+      540,
+      541,
+      543,
+      547,
+      830,
+      831,
+      832,
+      833,
+      834,
+      883,
+      893,
+      894,
+      898,
+      900,
+      902,
+      906,
+      941,
+      963,
+      1201,
+      1202,
+      1283,
+      1305,
+      1527,
+      1534,
+      1538,
+      1972,
+      4594
+    ],
+    "engineeringCostBonus": 0,
+    "engineeringMaterialBonus": -5.0,
+    "engineeringTimeBonus": 0,
+    "hiSecMultiplier": 1,
+    "lowSecMultiplier": 1,
+    "nullSecMultiplier": 1,
+    "refineryMaterialBonus": 0,
+    "refineryTimeBonus": 0
+  }
+}

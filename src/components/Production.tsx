@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import {Handle, Node, NodeProps, Position} from '@xyflow/react';
-import {quantityToString} from "./industrylib.ts";
-import TypeIcon from './TypeIcon';
-import {useDescData} from "./SettingsContext.tsx";
+import { Handle, Node, NodeProps, Position } from '@xyflow/react';
+
+import TypeIcon from './TypeIcon.tsx';
+
+import { quantityToString } from "../utils/quantityToString.ts";
+import { typeToDesc } from "../utils/dataImport.ts"
 
 type Production = Node<{ typeID: number, quantity: number}, 'production'>
 
 const Production = React.memo(({ data } : NodeProps<Production>) => {
     const [isHovered, setIsHovered] = useState(false);
-    const { typeToDesc } = useDescData()
 
     const typeName : string = (data.typeID ? typeToDesc[data.typeID.toString()].name : "");
     const typeGroup : string = (data.typeID ? typeToDesc[data.typeID.toString()].group : "");

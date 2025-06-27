@@ -1,69 +1,99 @@
-import { useEffect, useRef, useState } from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
+import fuzzysort from "fuzzysort";
 
-interface Item {
-    name: string;
-    id: number;
+import type { Type } from "../utils/dataImport.ts"
+
+interface SuggestionsBoxProps {
+    suggestions: Type[];
+    highlightedIndex: number;
+    setHighlightedIndex: (index: number) => void;
+    setResult: (result: Type) => void;
+    setFocused: (focused: boolean) => void;
+    inputRef: React.RefObject<HTMLInputElement>;
 }
 
 interface Props {
-    setQuery: (query: string) => void;
-    setResult: (result: Item) => void;
-    suggestions?: Item[];
+    items: Type[];
+    itemFilter: (item: Type) => boolean;
+    setResult: (result: Type) => void;
+    placeholder?: string;
 }
 
-const SearchBar = ({ setQuery, setResult, suggestions = [] }: Props) => {
-    const [focused, setFocused] = useState(false);
-    const [highlightedIndex, setHighlightedIndex] = useState(0);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+const SuggestionsBox = ({ suggestions, highlightedIndex, setHighlightedIndex, setResult, setFocused, inputRef }: SuggestionsBoxProps) => {
     const highlightedSuggestionRef = useRef<HTMLDivElement>(null);
 
-    // Scroll the highlighted suggestion into view when it changes
     useEffect(() => {
         if (highlightedSuggestionRef.current) {
-            highlightedSuggestionRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            highlightedSuggestionRef.current.scrollIntoView({ behavior: "auto", block: "nearest" });
         }
     }, [highlightedIndex]);
 
-    // Global keydown event listener to focus input on letter key press
-    useEffect(() => {
-        const handleGlobalKeyDown = (e: KeyboardEvent) => {
-            // Only focus if the key is a single letter and no modifier keys are pressed
-            if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {
-                if (inputRef.current && document.activeElement !== inputRef.current) {
-                    inputRef.current.focus();
-                }
-            }
-        };
-        window.addEventListener("keydown", handleGlobalKeyDown);
-        return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-    }, []);
+    return (
+        <div className="bg-window-light/80 max-h-35 overflow-y-auto absolute w-[15em]">
+            {suggestions.map((item, index) => (
+                <div
+                    key={item.typeID}
+                    ref={index === highlightedIndex ? highlightedSuggestionRef : null}
+                    className={`p-[0.2em] border border-window-border bg-window-dark/60 hover:bg-window-light/60 hover:cursor-pointer text-regular ${
+                        highlightedIndex === index ? "bg-window-light/80" : ""
+                    }`}
+                    onClick={() => {
+                        setResult(item);
+                        if (inputRef.current) {
+                            inputRef.current.value = '';
+                            inputRef.current.blur();
+                        }
+                        setFocused(false);
+                        setHighlightedIndex(-1);
+                    }}
+                    onMouseEnter={() => setHighlightedIndex(index)}
+                >
+                    {item.name}
+                </div>
+            ))}
+        </div>
+    );
+};
 
-    // Click outside handler
+const SearchBar = ({ items, itemFilter, setResult, placeholder="Search for anything" }: Props) => {
+    const [focused, setFocused] = useState(false);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const [suggestions, setSuggestions] = useState<Type[]>([]);
+    const [query, setQuery] = useState("");
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
                 setFocused(false);
-                setHighlightedIndex(-1);
+                setHighlightedIndex(0);
             }
         };
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
+    useEffect(() => {
+        if (query) {
+            const availableItems = items.filter(itemFilter);
+            const partialMatches = fuzzysort.go(query, availableItems, { key: "name", threshold: 0.75 });
+            setSuggestions(partialMatches.map((m) => m["obj"]));
+            setHighlightedIndex(0);
+        } else {
+            setSuggestions([]);
+            setHighlightedIndex(0);
+        }
+    }, [query]);
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "ArrowDown") {
             e.preventDefault();
-            setHighlightedIndex((prev) => {
-                const nextIndex = prev + 1;
-                return nextIndex >= suggestions.length ? suggestions.length - 1 : nextIndex;
-            });
+            setHighlightedIndex((prev) => Math.min(prev + 1, suggestions.length - 1));
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
-            setHighlightedIndex((prev) => {
-                const nextIndex = prev - 1;
-                return nextIndex < 0 ? 0 : nextIndex;
-            });
+            setHighlightedIndex((prev) => Math.max(prev - 1, 0));
         } else if (e.key === "Enter") {
             if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
                 const selectedItem = suggestions[highlightedIndex];
@@ -71,49 +101,36 @@ const SearchBar = ({ setQuery, setResult, suggestions = [] }: Props) => {
                 setQuery('');
                 if (inputRef.current) {
                     inputRef.current.value = '';
-                    inputRef.current.blur(); // Lose focus after selection
+                    inputRef.current.blur();
                 }
                 setFocused(false);
-                setHighlightedIndex(-1);
+                setHighlightedIndex(0);
             }
         }
     };
 
+
     return (
-        <div ref={containerRef}>
+        <div ref={containerRef} className={"relative"}>
             <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search for anything"
+                placeholder={placeholder}
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onKeyDown={handleKeyDown}
-                className="p-[0.2em] z-20 border border-window-border outline-0 text-regular text-dim bg-window-dark/80 focus:bg-window-light self-stretch w-[15em]"
+                className="p-[0.2em] z-20 border border-window-border outline-0 text-regular text-dim bg-window-dark/80 focus:bg-window-light self-stretch w-[12em]"
             />
-            {focused && suggestions.length > 0 && (
-                <div className="bg-window-light/80 max-h-35 overflow-y-auto absolute w-[15em]">
-                    {suggestions.map((item, index) => (
-                        <div
-                            key={item.id}
-                            ref={index === highlightedIndex ? highlightedSuggestionRef : null}
-                            className={`p-[0.2em] border border-window-border bg-window-dark/60 hover:bg-window-light/60 hover:cursor-pointer text-regular ${
-                                highlightedIndex === index ? "bg-window-light/80" : ""
-                            }`}
-                            onClick={() => {
-                                setResult(item);
-                                setQuery('');
-                                if (inputRef.current) {
-                                    inputRef.current.value = '';
-                                    inputRef.current.blur(); // Lose focus on click selection
-                                }
-                                setFocused(false);
-                                setHighlightedIndex(-1);
-                            }}
-                            onMouseEnter={() => setHighlightedIndex(index)}
-                        >
-                            {item.name}
-                        </div>
-                    ))}
+            {focused && suggestions.length > 0 && inputRef && (
+                <div className="absolute  left-0">
+                    <SuggestionsBox
+                        suggestions={suggestions}
+                        highlightedIndex={highlightedIndex}
+                        setHighlightedIndex={setHighlightedIndex}
+                        setResult={setResult}
+                        setFocused={setFocused}
+                        inputRef={inputRef as RefObject<HTMLInputElement>}
+                    />
                 </div>
             )}
         </div>

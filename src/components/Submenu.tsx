@@ -7,13 +7,14 @@ interface Props {
     label: string;
     buttonLabel?: string;
     onButtonClick?: () => void;
+    type?: "heading" | "subheading";
 }
 
-const Submenu = ({ children, label, buttonLabel, onButtonClick }: Props) => {
+const Submenu = ({ children, label, buttonLabel, type="heading", onButtonClick }: Props) => {
     const [showMenu, setShowMenu] = useState(true);
     return (
-        <>
-            <p className="text-regular p-[0.5em] bg-window-light-active self-stretch flex items-center justify-between">
+        <div className={`self-stretch flex flex-col items-center justify-start`}>
+            <p className={`text-regular px-[0.5em] ${type === "heading" ? "bg-window-light-active py-[0.5em]" : "py-[0.2em]"} self-stretch flex items-center justify-between`}>
                 <label className="flex flex-row items-center hover:cursor-pointer">
                     <button onClick={()=> setShowMenu(!showMenu)}/>
                     <img src={showMenu ? caretDown : caretRight} alt={"toggle"} width={"16px"} height={"16px"}/>
@@ -26,10 +27,10 @@ const Submenu = ({ children, label, buttonLabel, onButtonClick }: Props) => {
                     {buttonLabel}
                 </button>
             </p>
-            {showMenu && (
-                children
-            )}
-        </>
+            <div className={`${showMenu ? "block" : "hidden"} flex flex-col items-center self-stretch px-[1em] gap-[1em] ${type === "heading" ? "mt-[1em]" : ""}`}>
+                {children}
+            </div>
+        </div>
     )
 }
 

@@ -1,9 +1,9 @@
 import Header from "./components/Header.tsx";
 import Viewport from "./components/Viewport.tsx";
 import './App.css'
-import {ViewportProvider} from "./components/ViewportContext.tsx";
-import {BrowserRouter} from "react-router-dom";
-import {SettingsProvider} from "./components/SettingsContext.tsx";
+import { ViewportProvider } from "./contexts/ViewportContext.tsx";
+import { BrowserRouter } from "react-router-dom";
+import { SettingsProvider } from "./contexts/SettingsContext.tsx";
 
 const App = ()=> {
   return (

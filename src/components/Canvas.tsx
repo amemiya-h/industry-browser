@@ -1,9 +1,9 @@
-import {Background, BackgroundVariant, ReactFlow} from '@xyflow/react';
+import React from "react";
+import { Background, BackgroundVariant, ReactFlow } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import Production from "./Production.tsx";
 import SourceButton from "./SourceButton.tsx";
-import React from "react";
 
 interface ProductionNode {
     id: string;
@@ -36,7 +36,6 @@ const nodeTypes = {'production': Production, 'sourceButton': SourceButton};
 
 const Canvas = React.memo(({ nodes, edges } : Props) => {
     const defaultViewport = {x: window.innerWidth / 2, y: window.innerHeight / 6, zoom: 0.5};
-
     return (
         <div className="flex-1 relative overflow-hidden z-10 bg-window-dark">
             <ReactFlow
@@ -48,6 +47,7 @@ const Canvas = React.memo(({ nodes, edges } : Props) => {
                 minZoom={0.1}
                 maxZoom={1}
                 proOptions={{ hideAttribution: true }}
+
             >
                 <Background variant={BackgroundVariant.Cross} size={5} gap={90} lineWidth={1} color={"#777"}/>
             </ReactFlow>

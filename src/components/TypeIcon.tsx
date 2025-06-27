@@ -1,5 +1,6 @@
 import fallback from "../assets/graphics/canvasUI/fallback.png";
-import {useTouch} from "./SettingsContext.tsx";
+
+import {useTouch} from "../hooks/useTouch.ts"
 
 interface Props {
     typeID?: number;

@@ -1,17 +1,24 @@
-import {useEffect, useRef, useState} from "react";
-import * as fuzzysort from "fuzzysort";
+import { useRef, useState } from "react";
 
 import industry from "../assets/graphics/industry.png"
 import info from "../assets/graphics/info.png"
 import settings from "../assets/graphics/settings.png"
-import checked from "../assets/graphics/check_true.png";
-import unchecked from "../assets/graphics/check_false.png";
-import minimize from "../assets/graphics/minimize_16px.png"
-import {useSettings, useDescData} from "./SettingsContext.tsx";
-import Submenu from "./Submenu.tsx";
-import SearchBar from "./SearchBar";
-import {types, typeOfScheme} from "./industrylib.ts";
+import check from "../assets/graphics/check.png";
+import cross from "../assets/graphics/cross.png";
+import minimize from "../assets/graphics/minimize_16px.png";
+import materialIcon from "../assets/graphics/material_efficiency.png"
+import timeIcon from "../assets/graphics/time_efficiency.png"
 
+import Submenu from "./Submenu.tsx";
+import SearchBar from "./SearchBar.tsx";
+
+import { useSettings } from "../contexts/SettingsContext.tsx";
+
+import { types, typeToDesc, getBaseScheme } from "../utils/dataImport.ts";
+import {useBehaviors} from "../contexts/BehaviorsContext.tsx";
+import {useResearch} from "../contexts/ResearchContext.tsx";
+import {useSkills} from "../contexts/SkillsContext.tsx";
+import {useFacilities} from "../contexts/FacilitiesContext.tsx";
 
 interface OverlayProps {
     isOpen: boolean;
@@ -30,9 +37,12 @@ const AboutOverlay= ({isOpen, closeOverlay} : OverlayProps) => {
                     className="bg-window-light-active border border-window-border-active border-t-primary w-[50vw] min-w-[20em] max-h-[80vh] m-[1em] flex flex-col justify-center items-center"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <div className="m-0 self-stretch flex flex-row justify-start items-center">
-                        <img src={info} alt="Info" className="logo" />
-                        <p className="text-title text-bright">EVE Industry Browser: Information</p>
+                    <div className="m-0 self-stretch flex flex-row justify-between items-center">
+                        <div className={"h-full w-[25em] flex flex-row items-center justify-start"}>
+                            <img src={info} alt="Info" className="logo" />
+                            <p className="text-title text-dim">EVE Industry Browser: Information</p>
+                        </div>
+                        <img src={minimize} onClick={closeOverlay} alt={"Minimize"} className={"m-[1em] hover:cursor-pointer opacity-60 hover:opacity-100"}/>
                     </div>
                     <div className="overflow-auto mx-[1em]">
                         <p className="text-regular m-[1em]">
@@ -96,10 +106,46 @@ const AboutOverlay= ({isOpen, closeOverlay} : OverlayProps) => {
     }
 }
 
-
 const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
-    const { toggles, setToggles, setMaterialEfficiency, materialEfficiencyMap, setMaterialEfficiencyMap, saveConfigToFile, loadConfigFromFile } = useSettings();
-    const { typeToDesc } = useDescData();
+    const {
+        saveConfigToFile,
+        loadConfigFromFile,
+    } = useSettings();
+
+    const {
+        toggles,
+        toggleSetting,
+        whitelist,
+        addWhitelist,
+        removeWhitelist,
+        blacklist,
+        addBlacklist,
+        removeBlacklist,
+    } = useBehaviors()
+
+    const {
+        setMaterialEfficiency,
+        setTimeEfficiency,
+        addResearch,
+        removeResearch,
+        researchMap,
+    } = useResearch()
+
+    const {
+        engineeringFacility,
+        refineryFacility,
+        setSecurity,
+        setType,
+        setSize,
+        addRigs,
+        removeRigs,
+    } = useFacilities()
+
+    const {
+        setSkills,
+        skillsMap,
+    } = useSkills()
+
     const toggleLabels = [
         "Show manufacturing",
         "Show reactions",
@@ -107,43 +153,11 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
         "Suppress fuel blocks",
         "Suppress R.A.M.",
         "Show only first row",
+        "Always show whitelisted items",
+        "Always hide blacklisted items",
     ];
 
-    const [query, setQuery] = useState("");
-    const [suggestions, setSuggestions] = useState<{ name: string; id: number }[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        const availableItems = types.filter(item => ((materialEfficiencyMap[item.id] === undefined) && (typeOfScheme(item.id) === "manufacturing")));
-        if (query) {
-            const partialMatches = fuzzysort.go(query, availableItems, { key: "name", threshold: 0.75 });
-            setSuggestions(partialMatches.map((m) => m["obj"]));
-        } else {
-            setSuggestions([]);
-        }
-    }, [query]);
-
-    const handleToggle = (index: number) => {
-        const updatedToggles = [...toggles];
-        updatedToggles[index] = !updatedToggles[index];
-        setToggles(updatedToggles);
-    };
-
-    const handleAddEfficiency = (item: { name: string; id: number }) => {
-        if (materialEfficiencyMap[item.id] === undefined) {
-            setMaterialEfficiency(item.id, 0);
-        }
-    };
-
-    const handleRemoveEfficiency = (typeID: number) => {
-        const { [typeID]: _, ...updated } = materialEfficiencyMap;
-        setMaterialEfficiencyMap(updated);
-    };
-
-    const handleEfficiencyChange = (typeID: number, value: number) => {
-        const clampedValue = Math.min(Math.max(value, 0), 10);
-        setMaterialEfficiency(typeID, clampedValue);
-    };
 
     const handleFileInputChange = async (
         event: React.ChangeEvent<HTMLInputElement>
@@ -153,13 +167,11 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
         await loadConfigFromFile(file);
     };
 
-    // Trigger the hidden file input’s click to open the system dialog
     const handleUploadButtonClick = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     };
-
 
     if (!isOpen) return null;
 
@@ -169,64 +181,111 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
             onClick={closeOverlay}
         >
             <div
-                className="bg-window-dark-active border border-window-border-active border-t-primary w-[50vw] min-w-[20em] max-h-[80vh] flex flex-col justify-center items-center"
+                className="bg-window-dark-active border border-window-border-active border-t-primary w-[50vw] min-w-[28em] max-h-[80vh] flex flex-col justify-center items-center"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="m-0 self-stretch flex flex-row justify-between items-center">
                     <div className={"h-full w-[16em] flex flex-row items-center justify-start"}>
                         <img src={settings} alt="Settings" className="logo" />
-                        <p className="text-title text-bright">Settings</p>
+                        <p className="text-title text-dim">Settings</p>
                     </div>
                     <img src={minimize} onClick={closeOverlay} alt={"Minimize"} className={"m-[1em] hover:cursor-pointer opacity-60 hover:opacity-100"}/>
                 </div>
                 <div className="overflow-auto mx-[1em] self-stretch flex flex-col justify-start items-center gap-[1em]">
                     <Submenu label={"Default behaviour"}>
                         <div className="flex flex-col justify-start items-start gap-[1em] self-stretch mx-[1em]">
-                            {toggleLabels.map((label, index) => (
-                                <label key={index} className="flex items-center gap-2 hover:cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={toggles[index]}
-                                        onChange={() => handleToggle(index)}
-                                        className="sr-only peer"
-                                    />
-                                    <img
-                                        src={checked}
-                                        alt="Checked"
-                                        width="16px"
-                                        height="16px"
-                                        className="hidden hover:cursor-pointer bg-window-dark border border-window-border peer-checked:block"
-                                    />
-                                    <div
-                                        className="size-[16px] hover:cursor-pointer bg-window-dark border border-window-border peer-checked:hidden"
-                                    />
-                                    <span>{label}</span>
-                                </label>
-                            ))}
+                        {toggleLabels.map((label, index) => (
+                            <label key={index} className="flex items-center gap-2 hover:cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={toggles[index]}
+                                    onChange={() => toggleSetting(index)}
+                                    className="sr-only peer"
+                                />
+                                <img
+                                    src={check}
+                                    alt="Checked"
+                                    width="16px"
+                                    height="16px"
+                                    className="hidden hover:cursor-pointer bg-window-dark border border-window-border peer-checked:block"
+                                />
+                                <div
+                                    className="size-[16px] hover:cursor-pointer bg-window-dark border border-window-border peer-checked:hidden"
+                                />
+                                <span>{label}</span>
+                            </label>
+                        ))}
                         </div>
-                    </Submenu>
-                    <Submenu label={"Material Efficiency"}>
-                        <div className="relative flex flex-col items-center self-stretch gap-[1em] mx-[1em]">
-                            <p className="text-regular text-dim self-stretch">Add material efficiency value for items here.</p>
+                        <Submenu label={"Whitelist"} type={"subheading"}>
                             <div className="flex flex-col gap-[1em] mx-[1em] w-[80%]">
-                                <SearchBar setQuery={setQuery} setResult={handleAddEfficiency} suggestions={suggestions} />
-                                <div className="h-[10em] flex flex-col gap-[0.2em] overflow-y-scroll text-sm bg-window-dark-active border border-window-border-active">
-                                    {Object.entries(materialEfficiencyMap).map(([typeID, efficiency]) => (
+                                <SearchBar items={types} itemFilter={() => true} setResult={(result) => addWhitelist(result.typeID)} placeholder={"Search"} />
+                                <div className="h-[16em] flex flex-col gap-[0.2em] overflow-y-scroll text-sm bg-window-dark-active border border-window-border-active">
+                                    {whitelist.map((typeID) => (
+                                        <div key={typeID} className="flex justify-between items-center p-[0.2em] bg-window-light-active border border-window-border-active">
+                                            <span className="text-regular mx-[0.5em]">{typeToDesc[typeID].name}</span>
+                                            <img
+                                                src={cross}
+                                                alt="Remove"
+                                                className="hover:cursor-pointer"
+                                                onClick={() => removeWhitelist(typeID)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </Submenu>
+                        <Submenu label={"Blacklist"} type={"subheading"}>
+                            <div className="flex flex-col gap-[1em] mx-[1em] w-[80%]">
+                                <SearchBar items={types} itemFilter={() => true} setResult={(result) => addBlacklist(result.typeID)} placeholder={"Search"} />
+                                <div className="h-[16em] flex flex-col gap-[0.2em] overflow-y-scroll text-sm bg-window-dark-active border border-window-border-active">
+                                    {blacklist.map((typeID) => (
+                                        <div key={typeID} className="flex justify-between items-center p-[0.2em] bg-window-light-active border border-window-border-active">
+                                            <span className="text-regular mx-[0.5em]">{typeToDesc[typeID].name}</span>
+                                            <img
+                                                src={cross}
+                                                alt="Remove"
+                                                className="hover:cursor-pointer"
+                                                onClick={() => removeBlacklist(typeID)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </Submenu>
+                    </Submenu>
+                    <Submenu label={"Research"}>
+                        <div className="relative flex flex-col items-center self-stretch gap-[1em] mx-[1em]">
+                            <p className="text-regular text-dim self-stretch">Set Material Efficiency and Time Efficiency for individual blueprints here.</p>
+                            <div className="flex flex-col gap-[1em] mx-[1em] w-[80%]">
+                                <SearchBar items={types} itemFilter={item => ((researchMap[item.typeID] === undefined) && (getBaseScheme(item.typeID)?.type === "manufacturing"))} setResult={(result) => {addResearch(result.typeID)}} placeholder={"Search"}/>
+                                <div className="h-[24em] flex flex-col gap-[0.2em] overflow-y-scroll text-sm bg-window-dark-active border border-window-border-active">
+                                    {Object.entries(researchMap).map(([typeID, {material, time}]) => (
                                         <div key={typeID} className="flex justify-between items-center self-stretch bg-window-light-active border border-window-border-active p-[0.2em]">
                                             <span className="text-regular mx-[0.5em]">{`${typeToDesc[typeID.toString()].name}`}</span>
-                                            <div className="flex">
+                                            <div className="flex items-center gap-[0.5em]">
+                                                <img src={materialIcon} alt={"ME"} className={"mx-[0.2em]"}/>
                                                 <input
                                                     type="number"
                                                     min={0}
                                                     max={10}
-                                                    value={efficiency}
-                                                    onChange={(e) => handleEfficiencyChange(Number(typeID), Number(e.target.value))}
+                                                    value={material}
+                                                    onChange={(e) => setMaterialEfficiency(Number(typeID), Number(e.target.value))}
                                                     className="w-[6em] outline-0 text-sm bg-window-dark focus:bg-window-light border border-window-border px-2 py-1"
 
                                                 />
+                                                <img src={timeIcon} alt={"TE"} className={"mx-[0.2em]"}/>
+                                                <input
+                                                    type="number"
+                                                    min={0}
+                                                    max={20}
+                                                    step={2}
+                                                    value={time}
+                                                    onChange={(e) => setTimeEfficiency(Number(typeID), Number(e.target.value))}
+                                                    className="w-[6em] outline-0 text-sm bg-window-dark focus:bg-window-light border border-window-border px-2 py-1"
+                                                />
                                                 <img
-                                                    src={unchecked}
-                                                    onClick={() => handleRemoveEfficiency(Number(typeID))}
+                                                    src={cross}
+                                                    onClick={() => removeResearch(Number(typeID))}
                                                     className="m-[0.5em] 40 hover:cursor-pointer"
                                                 >
                                                 </img>
@@ -235,6 +294,148 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
                                     ))}
                                 </div>
                             </div>
+                        </div>
+                    </Submenu>
+                    <Submenu label={"Facilities"}>
+                        <Submenu label={"Engineering"} type={"subheading"}>
+                            <div className="flex flex-col gap-[1em] self-stretch">
+                                <label>
+                                    Security Status:
+                                    <select
+                                        className="bg-window-dark border border-window-border p-[0.5em]"
+                                        value={engineeringFacility.security}
+                                        onChange={(e) => setSecurity("engineering", e.target.value as "high" | "low" | "null")}
+                                    >
+                                        <option value="high">Highsec</option>
+                                        <option value="low">Lowsec</option>
+                                        <option value="null">Nullsec</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Facility Type:
+                                    <select
+                                        className="bg-window-dark border border-window-border p-[0.5em]"
+                                        value={engineeringFacility.type}
+                                        onChange={(e) => setType(e.target.value as "npc" | "citadel" | "complex" | "refinery")}
+                                    >
+                                        <option value="npc">NPC</option>
+                                        <option value="citadel">Citadel</option>
+                                        <option value="complex">Engineering Complex</option>
+                                        <option value="refinery">Refinery</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Size:
+                                    <select
+                                        className="bg-window-dark border border-window-border p-[0.5em]"
+                                        value={engineeringFacility.size}
+                                        onChange={(e) => setSize("engineering", e.target.value as "m" | "l" | "xl")}
+                                    >
+                                        <option value="xl">XL</option>
+                                        <option value="l">L</option>
+                                        <option value="m">M</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Rigs:
+                                    <div className="flex flex-col gap-[0.5em]">
+                                        {engineeringFacility.rigs.map((rigId) => (
+                                            <div key={rigId} className="flex justify-between items-center">
+                                                <span>{`Rig ${rigId}`}</span>
+                                                <button
+                                                    className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                                    onClick={() => removeRigs("engineering", rigId)}
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <button
+                                            className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                            onClick={() => addRigs("engineering", Math.floor(Math.random() * 100))} // Example: Add a random rig
+                                        >
+                                            Add Rig
+                                        </button>
+                                    </div>
+                                </label>
+                            </div>
+                        </Submenu>
+                        <Submenu label={"Refinery"} type={"subheading"}>
+                            <div className="flex flex-col gap-[1em] self-stretch">
+                                <label>
+                                    Security Status:
+                                    <select
+                                        className="bg-window-dark border border-window-border p-[0.5em]"
+                                        value={refineryFacility.security}
+                                        onChange={(e) => setSecurity("refinery", e.target.value as "low" | "null")}
+                                    >
+                                        <option value="low">Lowsec</option>
+                                        <option value="null">Nullsec</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Size:
+                                    <select
+                                        className="bg-window-dark border border-window-border p-[0.5em]"
+                                        value={refineryFacility.size}
+                                        onChange={(e) => setSize("refinery", e.target.value as "m" | "l")}
+                                    >
+                                        <option value="l">L</option>
+                                        <option value="m">M</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Rigs:
+                                    <div className="flex flex-col gap-[0.5em]">
+                                        {refineryFacility.rigs.map((rigId) => (
+                                            <div key={rigId} className="flex justify-between items-center">
+                                                <span>{`Rig ${rigId}`}</span>
+                                                <button
+                                                    className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                                    onClick={() => removeRigs("refinery", rigId)}
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <button
+                                            className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                            onClick={() => addRigs("refinery", Math.floor(Math.random() * 100))} // Example: Add a random rig
+                                        >
+                                            Add Rig
+                                        </button>
+                                    </div>
+                                </label>
+                            </div>
+                        </Submenu>
+                    </Submenu>
+                    <Submenu label={"Skills"}>
+                        <div className="flex flex-col gap-[1em] mx-[1em] w-[80%]">
+                            {Object.entries(skillsMap).map(([id, {name, level}]) => (
+                                <div key={id} className="flex items-center gap-[1em]">
+                                    {name}
+                                    <button
+                                        className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                        onClick={() => setSkills(Number(id), Math.max(0, level - 1))}
+                                    >
+                                        {"<"}
+                                    </button>
+                                    <div className="flex gap-[0.2em]">
+                                        {[...Array(5)].map((_, index) => (
+                                            <div
+                                                key={index}
+                                                className={`size-[16px] ${index < level ? "bg-bright" : "bg-window-dark-active"} border border-window-border`}
+                                            />
+                                        ))}
+                                    </div>
+                                    <button
+                                        className="text-sm bg-secondary border border-window-border px-[0.5em]"
+                                        onClick={() => setSkills(Number(id), Math.min(5, level + 1))}
+                                    >
+                                        {">"}
+                                    </button>
+                                </div>
+                            ))}
                         </div>
                     </Submenu>
                 </div>
@@ -259,8 +460,6 @@ const SettingsOverlay = ({ isOpen, closeOverlay }: OverlayProps) => {
     );
 };
 
-
-
 const Header = () => {
     const [isOpenAbout, setIsOpenAbout] = useState(false);
     const [isOpenSettings, setIsOpenSettings] = useState(false);
@@ -269,7 +468,6 @@ const Header = () => {
     const closeAboutOverlay = () => setIsOpenAbout(false);
     const openSettingsOverlay = () => setIsOpenSettings(true);
     const closeSettingsOverlay = () => setIsOpenSettings(false);
-
 
     return (
         <div id={"header"} className={"w-full h-[4em] bg-window-light-active flex flex-row items-center justify-start gap-[1em]"}>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Handle, Node, NodeProps, Position} from '@xyflow/react';
+import { Handle, Node, NodeProps, Position } from '@xyflow/react';
 
 import sourcemanufacturingexpanded from "../assets/graphics/canvasUI/source/sourcemanufacturingexpanded.png"
 import sourcemanufacturingexpandedhover from "../assets/graphics/canvasUI/source/sourcemanufacturingexpandedhover.png"
@@ -25,7 +25,7 @@ import sourcereactionsuppressedpressed from "../assets/graphics/canvasUI/source/
 import sourcepisuppressed from "../assets/graphics/canvasUI/source/sourcepisuppressed.png"
 import sourcepisuppressedhover from "../assets/graphics/canvasUI/source/sourcepisuppressedhover.png"
 import sourcepisuppressedpressed from "../assets/graphics/canvasUI/source/sourcepisuppressedpressed.png"
-import {useSuppressSignalContext} from "./ViewportContext.tsx";
+import { useViewportContext } from "../contexts/ViewportContext.tsx";
 
 type SourceButton = Node<{ state: "expanded" | "collapsed", variant: "manufacturing" | "invention" | "reaction" | "pi", parentID: number}, 'button'>
 
@@ -80,7 +80,7 @@ const SourceButton = React.memo(({ data }:NodeProps<SourceButton>) => {
     const [status, setStatus] = useState<"idle" | "hover" | "pressed">("idle");
     const [pressedInside, setPressedInside] = useState(false);
     const [isMousePressed, setIsMousePressed] = useState(false);
-    const {setSignalData} = useSuppressSignalContext();
+    const { setSignalData } = useViewportContext();
 
     useEffect(() => {
         const handleMouseDown = () => setIsMousePressed(true);

@@ -1,75 +1,69 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom"; // Import useSearchParams
-import * as fuzzysort from "fuzzysort";
+import { useSearchParams } from "react-router-dom";
 
 import Canvas from "./Canvas.tsx";
 import Sidebar from "./Sidebar.tsx";
 import SearchBar from "./SearchBar.tsx";
-import { useActiveRoot, useSuppressSignalContext } from "./ViewportContext.tsx";
-import { getTree, toggleNode, generateDisplayNodes, generateConnections, updateQuantities } from "./industrylib.ts";
-import { useSettings } from "./SettingsContext.tsx";
-import { types } from "./industrylib.ts";
 
-interface Item {
-    name: string;
-    id: number;
-}
+import { useViewportContext } from "../contexts/ViewportContext.tsx";
 
-interface MaterialTree {
-    id: number;
-    typeID: number;
-    quantity: number;
-    state: "expanded" | "collapsed";
-    depth: number;
-    productionType: "manufacturing" | "invention" | "reaction" | "pi" | "";
-    children: MaterialTree[];
-}
+import { getTree, generateDisplayNodes, generateConnections } from "../utils/treeGenerate.ts";
+import type { MaterialTree } from "../utils/treeGenerate.ts";
+import { toggleNode, updateQuantities } from "../utils/treeUpdate.ts";
+import { getBaseScheme, types } from "../utils/dataImport.ts";
+import {useResearch} from "../contexts/ResearchContext.tsx";
+import {useBehaviors} from "../contexts/BehaviorsContext.tsx";
+import {useGetScheme} from "../utils/productionUtils.ts";
+
+
 
 const Viewport = () => {
-    const { activeRoot, setActiveRoot } = useActiveRoot();
-    const { signalData, setSignalData } = useSuppressSignalContext();
     const [searchParams, setSearchParams] = useSearchParams();
-    const { runs, setRuns, materialEfficiency, materialEfficiencyMap, toggles } = useSettings();
+
+    const { runs, setRuns, activeRoot, setActiveRoot, signalData, setSignalData } = useViewportContext();
+    const { materialEfficiency, researchMap } = useResearch();
+    const { toggles } = useBehaviors()
 
     const [collapsed, setCollapsed] = useState(true);
-    const [query, setQuery] = useState("");
-    const [suggestions, setSuggestions] = useState<Item[]>([]);
     const [activeTree, setActiveTree] = useState<MaterialTree | null>(null);
     const [toggleState, setToggleState] = useState<boolean[]>(toggles);
+    const [productionQuantity, setProductionQuantity] = useState(runs);
+
+    const getScheme = useGetScheme();
 
     useEffect(() => {
-        // Sync activeTree with URL query parameter
         const rootId = searchParams.get("rootId");
         if (rootId) {
-            const root = types.find((item) => item.id === parseInt(rootId, 10));
+            const root = types.find((item) => item.typeID === parseInt(rootId));
             if (root) setActiveRoot(root);
         }
     }, [searchParams, setActiveRoot]);
 
     useEffect(() => {
         if (activeRoot) {
-            setActiveTree(getTree(activeRoot.id, runs, materialEfficiency, toggles));
-            setSearchParams({ rootId: activeRoot.id.toString() }); // Update URL when activeRoot changes
+            setActiveTree(getTree(activeRoot.typeID, productionQuantity, getScheme, toggles));
+            setSearchParams({ rootId: activeRoot.typeID.toString() });
         }
     }, [activeRoot, setSearchParams]);
 
     useEffect(() => {
         if (activeTree) {
-            // Only update quantities on the existing tree structure
-            updateQuantities(activeTree, runs, materialEfficiency);
-            // Force a re-render by setting a new reference if necessary
+            updateQuantities(activeTree, productionQuantity, materialEfficiency);
             setActiveTree({ ...activeTree });
         }
-    }, [runs, materialEfficiencyMap]);
+    }, [productionQuantity, researchMap]);
 
     useEffect(() => {
-        if (query) {
-            const partialMatches = fuzzysort.go(query, types, { key: "name", threshold: 0.75 });
-            setSuggestions(partialMatches.map((m) => m["obj"]));
-        } else {
-            setSuggestions([]);
+        if (activeTree) {
+            const scheme = getBaseScheme(activeTree.typeID);
+            if (scheme) {
+                setProductionQuantity(runs * scheme.product.quantity)
+            } else {
+                setProductionQuantity(runs)
+            }
         }
-    }, [query]);
+    }, [activeTree, runs]);
+
 
     useEffect(() => {
         if (activeTree && signalData) {
@@ -90,9 +84,6 @@ const Viewport = () => {
             firstRow: 5,
         }[type];
 
-        const newToggleState = [...toggleState];
-        newToggleState[typeIndex] = !toggleState[typeIndex];
-
         function traverseAndToggle(node: MaterialTree): MaterialTree {
             const updatedChildren = node.children.map(traverseAndToggle);
 
@@ -103,7 +94,7 @@ const Viewport = () => {
                 (type !== "fuelblock" && type !== "ram" && type !== "firstRow" && node.productionType === type)
             ) {
                 return toggleNode(
-                    { ...node, children: updatedChildren, state: newToggleState[typeIndex] ? "collapsed" : "expanded" },
+                    { ...node, children: updatedChildren, state: toggleState[typeIndex] ? "expanded" : "collapsed" },
                     node.id
                 );
             }
@@ -111,8 +102,11 @@ const Viewport = () => {
             return { ...node, children: updatedChildren };
         }
 
-        setToggleState(newToggleState);
+        const newToggleState = [...toggleState];
+        newToggleState[typeIndex] = !toggleState[typeIndex];
+
         setActiveTree(traverseAndToggle(activeTree));
+        setToggleState(newToggleState);
     };
 
     const nodes = useMemo(() => {
@@ -128,7 +122,7 @@ const Viewport = () => {
             <Canvas nodes={nodes} edges={edges} />
 
             <div className="absolute z-20 top-[1em] left-[1em] flex flex-col items-center">
-                <SearchBar setQuery={setQuery} setResult={setActiveRoot} suggestions={suggestions} />
+                <SearchBar items={types} itemFilter={() => true} setResult={setActiveRoot}/>
                 <div className="flex justify-start my-[0.5em] self-stretch">
                     <div className="flex flex-col items-center">
                         <span className="text-sm">JOB RUNS</span>
@@ -191,7 +185,7 @@ const Viewport = () => {
             <Sidebar
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
-                typeID={activeRoot?.id}
+                typeID={activeRoot?.typeID}
                 activeTree={activeTree}
             />
         </div>
